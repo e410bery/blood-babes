@@ -1,10 +1,18 @@
-import initial_numbers as c
+#import initial_numbers as c
 import numpy as np
 #equations: (use c.--- to use variables defined in initial numbers file.
-ironMR = c.bloodflowQ*c.ironC
+#ironMR = c.bloodflowQ*c.ironC
 
-# lists
- np.array(144)
+#~~~~~~~~~~~  lists ~~~~~~~~~~#
+time = np.linspace(0,143,num=144)
+blossrate = np.zeros(time.size)
+#iron masses:
+ironRep = np.zeros(time.size)
+ironStor = np.zeros(time.size)
+ironROB = np.zeros(time.size)
+ironSI = np.zeros(time.size)
+#hep mass in storage:
+hep = np.zeros(time.size)
 
 #small intestine:
 
