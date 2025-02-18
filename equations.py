@@ -3,11 +3,15 @@ import numpy as np
 #equations: (use c.--- to use variables defined in initial numbers file.
 ironMR = c.bloodflowQ*c.ironC
 
+# lists
+ np.array(144)
 
 #small intestine:
 
 
 #storage:
+
+#slope for estrogen:
 
 
 """notes:

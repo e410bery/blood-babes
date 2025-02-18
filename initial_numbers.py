@@ -3,7 +3,7 @@
 
 bloodflowQ = 5 #L/min
 bloodflowQ = 14400*bloodflowQ #convert to dL/day
-ironC = 92 #microg/dL
+ironC = 92 #ug/dL
 
 #mass rates:
 m1iron = 18 #mg/day
@@ -13,5 +13,14 @@ m4iron = None
 m5iron = 0.15&m2iron 
 
 accIron = 250 #200-300 mg
-accIron = accIron*1000 #convert microg
+accIron = accIron*1000 #convert ug
 
+
+slopeHepEst = -.891 #ng/mL
+slopeHepEst = slopeHepEst*0.1 #conv to ug/dL
+slopeHepIron = 1 #ug.dL
+
+
+
+#need: geniune math models for estrogen, progeserone, bloodloss 
+#need: 
