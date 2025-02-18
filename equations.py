@@ -1,5 +1,5 @@
 import initial_numbers as c
-
+import numpy as np
 #equations: (use c.--- to use variables defined in initial numbers file.
 ironMR = c.bloodflowQ*c.ironC
 
