@@ -1,5 +1,6 @@
 #import initial_numbers as c
 import numpy as np
+import initial_numbers as c
 #equations: (use c.--- to use variables defined in initial numbers file.
 #ironMR = c.bloodflowQ*c.ironC
 
@@ -15,7 +16,6 @@ ironSI = np.zeros(time.size)
 hep = np.zeros(time.size)
 
 #small intestine:
-
 
 #storage:
 
