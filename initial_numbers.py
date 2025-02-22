@@ -2,6 +2,8 @@
 #put everything in micrograms, dL, and day.
 
 z = 1 #placeholder
+c = 1 #value that changes based on day in the cycle
+m7ironBase = 0.145 #baseline value for m7iron (the actual value changes per day)
 
 bloodflowQ = 5 #L/min
 bloodflowQ = 14400*bloodflowQ #convert to dL/day
@@ -28,7 +30,7 @@ genHemo = 25 #mg/day
 
 
 #mass rates (anemic):
-am2iron = z*m1iron #mg/day - this value should be changing depending on the absorption rate of iron in people with anemia
+am2iron = 0.75*m1iron #mg/day - decreased absorption by 25%
 am2hemo = z
 am3iron = m1iron-am2iron #mg/day
 am3hemo = z
