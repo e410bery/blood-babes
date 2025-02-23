@@ -7,6 +7,7 @@ import initial_numbers as c
 #~~~~~~~~~~~  lists ~~~~~~~~~~#
 time = np.linspace(0,143,num=144)
 blossrate = np.zeros(time.size)
+est = np.zeros(time.size)
 #iron masses:
 ironRep = np.zeros(time.size)
 ironStor = np.zeros(time.size)
@@ -14,6 +15,17 @@ ironROB = np.zeros(time.size)
 ironSI = np.zeros(time.size)
 #hep mass in storage:
 hep = np.zeros(time.size)
+
+
+#math models:
+#bloodloss rate: 12mL first day, decreases until ~0 on 6th day
+for i in range(time.size) :
+    blossrate[i] = 12*np.e**(-(time[i]/3)**2)
+
+#estrogen: 
+for i in range(time.size) :
+    est[i] = 12*np.e**(-(time[i]/3)**2)
+
 
 #small intestine:
 
