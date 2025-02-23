@@ -11,6 +11,8 @@ import numpy as np
 
 #blood loss over time during cycle
 
-#time vs iron, estrogen, hepcidin in storage
+#time vs accIron, accEstrogen, hepcidin in storage
 
 #time vs iron, prog, estrogen in reproductive
+
+

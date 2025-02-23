@@ -14,12 +14,18 @@ ironSI = np.zeros(time.size)
 #hep mass in storage:
 hep = np.zeros(time.size)
 
-#small intestine:
+#small intestine: 
 
+#for i in range(time.size()) :
 
 #storage:
 
 #slope for estrogen:
+
+
+
+
+
 
 
 """notes:
