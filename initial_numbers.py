@@ -1,6 +1,11 @@
 #initialize all constants here:
 #put everything in micrograms, dL, and day.
 
+
+#restructure so that a boolean controls which state we are in.
+anem = False;
+
+
 z = 1 #placeholder
 c = 1 #placeholder to signal a value that changes based on day in the cycle
 m7ironBase = 0.145 #baseline value for m7iron (the actual value changes per day)
@@ -56,6 +61,12 @@ anem_accEst = c #accumulation of estrogen in the reproductive system, varies per
 #relationships between hepcidin/iron/estrogen (normal)
 hepIron = z #this should be a formula, undetermined currently
 hepEst = 5.02 + accEst/-0.891
+#thresholds:
+ironMax = 160
+ironMin = 60
+#magnitudes of slopes, dependent on how much excess/unexcess iron
+hepUp = 10
+hepDown = 10
 
 #relationships between hepcidin/iron/estrogen (anemic)
 anem_hepIron = z #this should be a formula, undetermined currently

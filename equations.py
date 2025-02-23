@@ -5,34 +5,70 @@ import initial_numbers as c
 #ironMR = c.bloodflowQ*c.ironC
 
 #~~~~~~~~~~~  lists ~~~~~~~~~~#
-time = np.linspace(0,143,num=144)
+time = np.linspace(0,5,num=6) #6 days 
+cycle = np.linspace(0, 28, num=200) #28 days
 blossrate = np.zeros(time.size)
-est = np.zeros(time.size)
-#iron masses:
+totalblost = np.zeros(time.size)
+est = np.zeros(cycle.size)
+prog = np.zeros(cycle.size)
+#iron acc:
 ironRep = np.zeros(time.size)
 ironStor = np.zeros(time.size)
+for i in range(ironStor.size):
+    ironStor[i]= 250;
 ironROB = np.zeros(time.size)
-ironSI = np.zeros(time.size)
+#hemo acc:
+hemoStor = np.zeros(time.size)
+
 #hep mass in storage:
 hep = np.zeros(time.size)
 
 
-#math models:
+#~~~~~~~~~~ math models ~~~~~~~~~~~#
+
 #bloodloss rate: 12mL first day, decreases until ~0 on 6th day
 for i in range(time.size) :
     blossrate[i] = 12*np.e**(-(time[i]/3)**2)
+totalblost = np.cumsum(blossrate)
 
-#estrogen: 
+#estrogen: piecewise starting at 50pg/L, peaking (14 days, 150 pg/L) and (23 days, )
+for i in range(cycle.size) :
+    if(cycle[i]<14) : #0-14 days
+        est[i] = -220*(cycle[i]-14)*np.e**(.8*(cycle[i]-14)) + 50
+    elif cycle[i]>14 and cycle[i]<=20 :
+        est[i] = 2.5*(cycle[i]-16)**2 + 50
+    else:
+        est[i] = -2.3*(cycle[i]-22.7)**2 + 108
+
+#progesterone: .5 ng/mL base amt, peaks (21 days, 20 ng/mL)
+for i in range(cycle.size) :
+    prog[i] = 20*np.e**(-((cycle[i]-21)/4)**2)
+
+
+#~~~~~~~~~~ mass balance equations ~~~~~~~~~#
+#loops through storage, RS, and RoB in that order. 
+#Calculates iron, hemo, hepcidin, and estrogen in each in that order.
+#only tracking accumulation
+#small intestine: no acc of anything, nothing to track.
+
 for i in range(time.size) :
-    est[i] = 12*np.e**(-(time[i]/3)**2)
+    #STORAGE:
+    #iron acc = in -out
+    ironStor[i] = c.m2iron*time[i] + c.m6iron*time[i] - c.m4ironHemo*time[i] - c.m5ironHemo*time[i]
+    #hemo acc=in-out
+    hemoStor[i] = c.m2hemo*time[i] + c.m6hemo*time[i] - c.m4hemo*time[i] - c.m5hemo*time[i]
+    #hep is downregulated by estrogen and upregulated by high iron.
+    hep[i] = 5.02 - est[i]/0.891 
+    if (ironStor[i]>c.ironMax) :
+        hep[i]+=c.hepUp*(ironStor[i] - c.ironMax)
+    if (ironStor[i]<c.ironMin) :
+        hep[i]-=c.hepDown*(c.ironMin - ironStor[i])
 
 
-#small intestine:
+print("times: ", time)
+print("iron in storage: ", ironStor)
+print("hep: ", hep)
 
-
-#storage:
-
-#slope for estrogen:
 
 
 
