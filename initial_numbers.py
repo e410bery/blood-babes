@@ -80,3 +80,6 @@ accRep = m4hemo + m8hemo - m7hemo - m9hemo #this value will change based on dail
 #anemic values that are most relevant to graphing
 anem_accIronStorage = c #calculate this based on the varying amounts of hepcidin resulting from the varying amounts of estrogen (anem_accEst) and varying amounts of iron leaving through menstruation (anem_m7hemo)
 anem_accRep = anem_m4hemo + anem_m8hemo - anem_m7hemo - anem_m9hemo #this value will change based on daily variations of anem_m7hemo
+
+#how I would go about doing this: use changing amounts of estrogen to calculate hepcidin, changing amounts of blood through menstruation to calculate hepcidin, and then adding the two
+#THEN, plug that value back into the hepcidin/iron relationship equation to get a new value of iron (this is iron in storage)
