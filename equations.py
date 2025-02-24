@@ -54,9 +54,9 @@ for i in range(cycle.size) :
 for i in range(time.size) :
     #STORAGE:
     #iron acc = in -out
-    ironStor[i] = c.m2iron*time[i] + c.m6iron*time[i] - c.m4ironHemo*time[i] - c.m5ironHemo*time[i]
+    ironStor[i] = c.m2iron*time[i] + c.m6iron*time[i] - c.m4hemo*time[i] - c.m5hemo*time[i]
     #hemo acc=in-out
-    hemoStor[i] = c.m2hemo*time[i] + c.m6hemo*time[i] - c.m4hemo*time[i] - c.m5hemo*time[i]
+    #hemoStor[i] = c.m2hemo*time[i] + c.m6hemo*time[i] - c.m4hemo*time[i] - c.m5hemo*time[i]
     #hep is downregulated by estrogen and upregulated by high iron.
     hep[i] = 5.02 - est[i]/0.891 
     if (ironStor[i]>c.ironMax) :
@@ -80,3 +80,6 @@ print("hep: ", hep)
 -for hepcidin, we can extrapolate a relationship (like assuming linear change and guess constants)
 especially if we can find a experimental data point to extrapolalte from. 
 """
+
+
+#fix day to be 
