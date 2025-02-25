@@ -14,33 +14,29 @@ bloodflowQ = 5 #L/min
 bloodflowQ = 14400*bloodflowQ #convert to dL/day
 ironC = 92 #microg/dL
 m1iron = 18 #mg/day
-m1hemo = 126000000 #mg/day
+m11hemo = 126000000 #mg/day
 
 if anem == False:
     m2iron = 0.1*m1iron #mg/day
-    m2hemo = 0.1*m1hemo #mg/day
+    m2hemo = 0.1*m11hemo #mg/day
     m3iron = 0.9*m1iron #mg/day
-    m3hemo = 0.9*m1hemo #mg/day
+    m3hemo = 0.9*m11hemo #mg/day
 
 if anem == True:
     m2iron = 0.050*m1iron #mg/day
-    m2hemo = 0.050*m1hemo #mg/day
+    m2hemo = 0.050*m11hemo #mg/day
     m3iron = 0.95*m1iron #mg/day
-    m3hemo = 0.95*m1hemo #mg/day
+    m3hemo = 0.95*m11hemo #mg/day
 #mass rates:
-m4ironHemo = 0.15*m2iron #mg/day, this is actually hemoglobin since it's coming out of storage, but I wanted to differentiate it
-m4hemo = 0.15*m2hemo #mg/day
-m4hemo = m4ironHemo + m4hemo #mg/day
-m5ironHemo = 0.85*m2iron #mg/day, this is actually hemoglobin since it's coming out of storage, but I wanted to differentiate it
-m5hemo = 0.85*m2hemo #mg/day
-m5hemo = m5ironHemo + m5hemo #mg/day
+m4hemo = 0.15*(m2iron + m2hemo) #mg/day
+m5hemo = 0.85*(m2iron + m2hemo) #mg/day
 m10iron = m3iron #mg/day
-m6iron = m3iron - m10iron #mg/day
 m6hemo = 272000000 #mg/day
 m7hemo = c #mg/day
 m8hemo = 11000000 #mg/day
 m9hemo = m6hemo + m8hemo - m3hemo - m5hemo #mg/day
 conIron = 25 #mg/day
+genIron = c #changes to accommmodate the fluctuations in accumulation in storage
 accEst = c #accumulation of estrogen in the reproductive system, varies per day
 
 #relationships between hepcidin/iron/estrogen (normal) - all of these values should be calculated from the lists in the for loops
@@ -67,3 +63,11 @@ accRep = m4hemo + m8hemo - m7hemo - m9hemo #this value will change based on dail
 print('m1a is', m1iron)
 print('m2a is', m2iron)
 print('m3a is', m3iron)
+print('m10a is', m10iron)
+print('m11b is', m11hemo)
+print('m2b is', m2hemo)
+print('m3b is', m3hemo)
+print('m4b is', m4hemo)
+print('m5b is', m5hemo)
+print('m8b is', m8hemo)
+print('m9b is', m9hemo)
