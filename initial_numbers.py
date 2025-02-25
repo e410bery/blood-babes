@@ -43,9 +43,13 @@ m9hemo = m6hemo + m8hemo - m3hemo - m5hemo #mg/day
 conIron = 25 #mg/day
 accEst = c #accumulation of estrogen in the reproductive system, varies per day
 
-#relationships between hepcidin/iron/estrogen (normal)
-hepIron = z #this should be a formula, undetermined currently
+#relationships between hepcidin/iron/estrogen (normal) - all of these values should be calculated from the lists in the for loops
+hepIron = 7298(m7hemo) + 1220000 #mg/day, used to calculate the amount of hepcidin based on amount of hemoglobin leaving through menstruation, changes daily
 hepEst = 5.02 + accEst/-0.891
+hepTotal = hepIron + hepEst #total hepcidin per day
+ironHep = 0.00137(hepTotal) - 3275.4 #total iron in storage
+
+
 #thresholds:
 ironMax = 160
 ironMin = 60
