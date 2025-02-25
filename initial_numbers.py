@@ -34,7 +34,7 @@ m4hemo = m4ironHemo + m4hemo #mg/day
 m5ironHemo = 0.85*m2iron #mg/day, this is actually hemoglobin since it's coming out of storage, but I wanted to differentiate it
 m5hemo = 0.85*m2hemo #mg/day
 m5hemo = m5ironHemo + m5hemo #mg/day
-m10iron = 16.2 #mg/day
+m10iron = m3iron #mg/day
 m6iron = m3iron - m10iron #mg/day
 m6hemo = 272000000 #mg/day
 m7hemo = c #mg/day
@@ -61,3 +61,4 @@ accRep = m4hemo + m8hemo - m7hemo - m9hemo #this value will change based on dail
 #THEN, plug that value back into the hepcidin/iron relationship equation to get a new value of iron (this is iron in storage)
 
 print(m9hemo)
+print(m6iron)
