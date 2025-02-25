@@ -60,4 +60,3 @@ accRep = m4hemo + m8hemo - m7hemo - m9hemo #this value will change based on dail
 #how I would go about doing this: use changing amounts of estrogen to calculate hepcidin, changing amounts of blood through menstruation to calculate hepcidin, and then adding the two
 #THEN, plug that value back into the hepcidin/iron relationship equation to get a new value of iron (this is iron in storage)
 
-print(m9hemo)

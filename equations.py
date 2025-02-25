@@ -5,11 +5,12 @@ import initial_numbers as c
 #ironMR = c.bloodflowQ*c.ironC
 
 #~~~~~~~~~~~  lists ~~~~~~~~~~#
-time = np.linspace(0,5,num=6) #6 days 
-cycle = np.linspace(0, 28, num=200) #28 days
+time = np.linspace(1,6,num=144) #6 days , list values in hours.
+cycle = np.linspace(1, 28, num=200) #28 days
 blossrate = np.zeros(time.size)
 totalblost = np.zeros(time.size)
-est = np.zeros(cycle.size)
+estgraph = np.zeros(cycle.size)
+est = np.zeros(time.size)
 prog = np.zeros(cycle.size)
 #iron acc:
 ironRep = np.zeros(time.size)
@@ -28,17 +29,20 @@ hep = np.zeros(time.size)
 
 #bloodloss rate: 12mL first day, decreases until ~0 on 6th day
 for i in range(time.size) :
-    blossrate[i] = 12*np.e**(-(time[i]/3)**2)
+    blossrate[i] = 12*np.e**(-((time[i]-1)/3)**2)
 totalblost = np.cumsum(blossrate)
 
 #estrogen: piecewise starting at 50pg/L, peaking (14 days, 150 pg/L) and (23 days, )
 for i in range(cycle.size) :
     if(cycle[i]<14) : #0-14 days
-        est[i] = -220*(cycle[i]-14)*np.e**(.8*(cycle[i]-14)) + 50
+        estgraph[i] = -220*(cycle[i]-14)*np.e**(.8*(cycle[i]-14)) + 50
     elif cycle[i]>14 and cycle[i]<=20 :
-        est[i] = 2.5*(cycle[i]-16)**2 + 50
+        estgraph[i] = 2.5*(cycle[i]-16)**2 + 50
     else:
-        est[i] = -2.3*(cycle[i]-22.7)**2 + 108
+        estgraph[i] = -2.3*(cycle[i]-22.7)**2 + 108
+#estrogen just during menstruation
+for i in range(time.size) :
+    est[i] = -220*(time[i]-14)*np.e**(.8*(time[i]-14)) + 50
 
 #progesterone: .5 ng/mL base amt, peaks (21 days, 20 ng/mL)
 for i in range(cycle.size) :
@@ -66,8 +70,10 @@ for i in range(time.size) :
 
 
 print("times: ", time)
-print("iron in storage: ", ironStor)
-print("hep: ", hep)
+print("times: ", time[::28])
+print("iron in storage: ", ironStor[::29])
+print("hep: ", hep[::29])
+print("est: ", est[::29])
 
 
 
@@ -82,4 +88,3 @@ especially if we can find a experimental data point to extrapolalte from.
 """
 
 
-#fix day to be 
