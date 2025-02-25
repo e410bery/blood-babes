@@ -28,8 +28,8 @@ plt.xticks([1,4,8,12,16,20,24,28])
 plt.axvspan(0, 6, facecolor='red', alpha=0.2)
 plt.text(.1,14, "Menstruation");
 plt.title('Hormone Variation Over Cycle')
-plt.show()
-#'''
+#plt.show()
+
 #blood loss over time during cycle
 plt.plot(e.time, e.blossrate, "red", label='mL lost per day')
 #plt.plot(e.time,e.totalblost, 'blue', label='total lost')

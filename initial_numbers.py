@@ -34,7 +34,7 @@ m4hemo = m4ironHemo + m4hemo #mg/day
 m5ironHemo = 0.85*m2iron #mg/day, this is actually hemoglobin since it's coming out of storage, but I wanted to differentiate it
 m5hemo = 0.85*m2hemo #mg/day
 m5hemo = m5ironHemo + m5hemo #mg/day
-m10iron = 16.2 #mg/day
+m10iron = m3iron #mg/day
 m6iron = m3iron - m10iron #mg/day
 m6hemo = 272000000 #mg/day
 m7hemo = c #mg/day
@@ -43,9 +43,13 @@ m9hemo = m6hemo + m8hemo - m3hemo - m5hemo #mg/day
 conIron = 25 #mg/day
 accEst = c #accumulation of estrogen in the reproductive system, varies per day
 
-#relationships between hepcidin/iron/estrogen (normal)
-hepIron = z #this should be a formula, undetermined currently
-hepEst = 5.02 + accEst/-0.891
+#relationships between hepcidin/iron/estrogen (normal) - all of these values should be calculated from the lists in the for loops
+hepIron = 7298*m7hemo + 1220000 #mg/day, used to calculate the amount of hepcidin based on amount of hemoglobin leaving through menstruation, changes daily
+hepEst = -0.891*accEst + 0.678 #mg/day, used to calculate the amount of hepcidin based on the amount of estrogen
+hepTotal = hepIron + hepEst #total hepcidin per day
+ironHep = 0.00137*hepTotal - 3275.4 #total iron in storage
+
+
 #thresholds:
 ironMax = 160
 ironMin = 60
@@ -60,3 +64,4 @@ accRep = m4hemo + m8hemo - m7hemo - m9hemo #this value will change based on dail
 #how I would go about doing this: use changing amounts of estrogen to calculate hepcidin, changing amounts of blood through menstruation to calculate hepcidin, and then adding the two
 #THEN, plug that value back into the hepcidin/iron relationship equation to get a new value of iron (this is iron in storage)
 
+print(m9hemo)
