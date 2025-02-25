@@ -3,7 +3,7 @@
 
 
 #restructure so that a boolean controls which state we are in.
-anem = True
+anem = False
 
 z = 1 #placeholder
 c = 1 #placeholder to signal a value that changes based on day in the cycle
@@ -64,5 +64,6 @@ accRep = m4hemo + m8hemo - m7hemo - m9hemo #this value will change based on dail
 #how I would go about doing this: use changing amounts of estrogen to calculate hepcidin, changing amounts of blood through menstruation to calculate hepcidin, and then adding the two
 #THEN, plug that value back into the hepcidin/iron relationship equation to get a new value of iron (this is iron in storage)
 
-print(m9hemo)
-print(m6iron)
+print('m1a is', m1iron)
+print('m2a is', m2iron)
+print('m3a is', m3iron)
