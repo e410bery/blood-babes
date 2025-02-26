@@ -31,10 +31,10 @@ if anem == True:
 m4hemo = 0.15*(m2iron + m2hemo) #mg/day
 m5hemo = 0.85*(m2iron + m2hemo) #mg/day
 m10iron = m3iron #mg/day
-m6hemo = 272000000 #mg/day
+m6hemo = c #calculated like the base value is, but m9hemo changes per day 272000000 #mg/day
 m7hemo = c #mg/day
 m8hemo = 11000000 #mg/day
-m9hemo = m6hemo + m8hemo - m3hemo - m5hemo #mg/day
+m9hemo = c #calculated like the base value is, but m6hemo changes per day
 conIron = 25 #mg/day
 genIron = c #changes to accommmodate the fluctuations in accumulation in storage
 accEst = c #accumulation of estrogen in the reproductive system, varies per day
@@ -50,9 +50,17 @@ ironHep = 0.00137#*hepTotal - 3275.4 #total iron in storage
 accIronStorage = c #calculate this based on the varying amounts of hepcidin resulting from the varying amounts of estrogen (accEst) and varying amounts of iron leaving through menstruation (m7hemo)
 accRep = m4hemo + m8hemo - m7hemo - m9hemo #this value will change based on daily variations of m7hemo
 
+#calculating base values
+base_m7hemo = 0.14884 #mg/day
+base_m9hemo = m4hemo + m8hemo - base_m7hemo #mg/day
+base_m6hemo = m3hemo + base_m9hemo + m5hemo - m8hemo #mg/day
+
 #how I would go about doing this: use changing amounts of estrogen to calculate hepcidin, changing amounts of blood through menstruation to calculate hepcidin, and then adding the two
 #THEN, plug that value back into the hepcidin/iron relationship equation to get a new value of iron (this is iron in storage)
 
+print('the base value for m7b is', base_m7hemo)
+print('the base value for m9b is', base_m9hemo)
+print('the base value for m6b is', base_m6hemo)
 print('m1a is', m1iron)
 print('m2a is', m2iron)
 print('m3a is', m3iron)
