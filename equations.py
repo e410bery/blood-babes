@@ -15,16 +15,17 @@ prog = np.zeros(cycle.size)
 #iron acc:
 #ironRep = np.zeros(time.size)    initial: acc = in-out-con
 ironStor = np.zeros(time.size)
-ironStor[0] = (c.m2iron + c.m6hemo) - (c.m4hemo + c.m5hemo) - c.conIron
-
+#ironStor[0] = (c.m2iron + c.m6hemo) - (c.m4hemo + c.m5hemo) - c.conIron
+ironStor[0] = 25000000
 #ironROB = np.zeros(time.size)
 
 #hemo acc:
 #hemoStor = np.zeros(time.size)
 hemo6 = np.zeros(time.size)
-hemo6[0] = c.m6hemo
+hemo6[0] = c.base_m6hemo
 hemo9 = np.zeros(time.size)
-hemo9[0] = c.m9hemo
+hemo9[0] = c.base_m9hemo
+
 #hep mass in storage:
 hep = np.zeros(time.size)
 
@@ -46,7 +47,7 @@ for i in range(cycle.size) :
         estgraph[i] = -2.3*(cycle[i]-22.7)**2 + 108
 #estrogen just during menstruation - also converts est from pg/L to mg/dL
 for i in range(time.size) :
-    est[i] = c.bloodflowQ*0.0001*(-220*(time[i]-14)*np.e**(.8*(time[i]-14)) + 50)
+    est[i] = c.bloodflowRepQ*0.0001*(-220*(time[i]-14)*np.e**(.8*(time[i]-14)) + 50)
 
 #progesterone: .5 ug/L base amt, peaks (21 days, 20 ug/L)
 for i in range(cycle.size) :
@@ -64,15 +65,17 @@ hep[0] = c.hepIron*blossrate[0] + 1220000 + c.hepEst*est[0] + 0.678
 
 for i in range(time.size-1) :
     #STORAGE:
-    ironStor[i+1] = ironStor[i] - c.ironHep*blossrate[i]*time[0]    
+    ironStor[i+1] = ironStor[i] - c.ironHep*hep[i]*time[i]  + c.genIron
+
     #hemo 
     hemo6[i+1] = hemo6[i]-blossrate[i]*time[i]
     hemo9[i+1] = hemo9[i]-blossrate[i]*time[i]
+
     #hep is downregulated by estrogen and downregulated by low iron.
-    hep[i+1] = hep[i] + c.hepEst*est[i]
-    #if iron falls below normal/initial storage level, 
+    hep[i+1] = hep[i] + c.hepEst*est[i]*time[i]
+    #if iron falls below normal/initial storage level, hep is decreased.
     if (ironStor[i]<ironStor[0]) : 
-        hep[i+1] = hep[i] + c.hepIron*(ironStor[0] - ironStor[i])
+        hep[i+1] = hep[i] + c.hepIron*(blossrate[i])*time[i] # or ironStor[0] - ironStor[i]
 
 
 print("times: ", time[::28])

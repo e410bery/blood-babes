@@ -12,6 +12,8 @@ accIronBase = 250*1000 #mg/day, baseline value for accIron
 
 bloodflowQ = 5 #L/min
 bloodflowQ = 14400*bloodflowQ #convert to dL/day
+bloodflowRepQ = 94.5 #mL/min
+bloodflowRepQ = 14.4*bloodflowRepQ #dL/day
 ironC = 92 #microg/dL
 m1iron = 18 #mg/day
 m11hemo = 126000000 #mg/day
