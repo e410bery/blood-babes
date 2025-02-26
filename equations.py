@@ -5,7 +5,7 @@ import initial_numbers as c
 #ironMR = c.bloodflowQ*c.ironC
 
 #~~~~~~~~~~~  lists ~~~~~~~~~~#
-time = np.linspace(1,6,num=144) #6 days , list values in hours.
+time = np.linspace(1,6,num=141) #6 days , list values in hours.
 cycle = np.linspace(1, 28, num=200) #28 days
 blossrate = np.zeros(time.size)
 totalblost = np.zeros(time.size)
@@ -69,11 +69,10 @@ for i in range(time.size) :
         hep[i]-=c.hepDown*(c.ironMin - ironStor[i])
 
 
-print("times: ", time)
 print("times: ", time[::28])
-print("iron in storage: ", ironStor[::29])
-print("hep: ", hep[::29])
-print("est: ", est[::29])
+print("iron in storage: ", ironStor[::28])
+print("hep: ", hep[::28])
+print("est: ", est[::28])
 
 
 
