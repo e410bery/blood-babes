@@ -96,4 +96,3 @@ print("est: ", est[::28])
 especially if we can find a experimental data point to extrapolalte from. 
 """
 
-

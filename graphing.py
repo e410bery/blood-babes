@@ -13,7 +13,17 @@ plt.plot(e.time, e.hep, label="hepcidin")
 plt.xlabel("time (days)")
 plt.ylabel("Stored (mg)")
 plt.legend()
-plt.show()
+plt.savefig("storage")
+#plt.show()
+plt.close()
+
+#estrogen vs hepcidin linear
+plt.plot(e.est, -0.891*e.est+0.678)
+plt.xlabel("Estrogen Present (mg)")
+plt.ylabel("Change in Hepcidin (mg)")
+plt.title("Estimated Relationship of Estrogen and Hepcidin")
+plt.savefig("estHepLine")
+#plt.show()
 
 #Estrogen and Hepcidin Relationship
 fig, ax1 = plt.subplots()
@@ -30,7 +40,8 @@ ax2.tick_params(axis='y', labelcolor='black')
 fig.tight_layout()  
 plt.xticks([1,2,3,4,5,6])
 plt.title("Estrogen and Hepcidin Relationship");
-plt.show()
+plt.savefig("estHep", bbox_inches="tight")
+#plt.show()
 
 fig, ax1 = plt.subplots()
 color = 'red'
@@ -46,7 +57,7 @@ ax2.tick_params(axis='y', labelcolor='black')
 fig.tight_layout()  
 plt.xticks([1,2,3,4,5,6])
 plt.title("Iron and Hepcidin Relationship");
-plt.show()
+#plt.show()
 #time vs iron, prog, estrogen in reproductive
 
 
