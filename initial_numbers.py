@@ -2,7 +2,7 @@
 #put everything in micrograms, dL, and day.
 
 
-#restructure so that a boolean controls which state we are in.
+#boolean controls which state we are in.
 anem = False
 
 z = 1 #placeholder
@@ -40,18 +40,11 @@ genIron = c #changes to accommmodate the fluctuations in accumulation in storage
 accEst = c #accumulation of estrogen in the reproductive system, varies per day
 
 #relationships between hepcidin/iron/estrogen (normal) - all of these values should be calculated from the lists in the for loops
-hepIron = 7298*m7hemo + 1220000 #mg/day, used to calculate the amount of hepcidin based on amount of hemoglobin leaving through menstruation, changes daily
-hepEst = -0.891*accEst + 0.678 #mg/day, used to calculate the amount of hepcidin based on the amount of estrogen
+hepIron = 7298#*m7hemo + 1220000 #mg/day, used to calculate the amount of hepcidin based on amount of hemoglobin leaving through menstruation, changes daily
+hepEst = -0.891#*accEst + 0.678 #mg/day, used to calculate the amount of hepcidin based on the amount of estrogen
 hepTotal = hepIron + hepEst #total hepcidin per day
-ironHep = 0.00137*hepTotal - 3275.4 #total iron in storage
+ironHep = 0.00137#*hepTotal - 3275.4 #total iron in storage
 
-
-#thresholds:
-ironMax = 160
-ironMin = 60
-#magnitudes of slopes, dependent on how much excess/unexcess iron
-hepUp = 10
-hepDown = 10
 
 #normal values that are most relevant to graphing
 accIronStorage = c #calculate this based on the varying amounts of hepcidin resulting from the varying amounts of estrogen (accEst) and varying amounts of iron leaving through menstruation (m7hemo)
@@ -71,3 +64,6 @@ print('m4b is', m4hemo)
 print('m5b is', m5hemo)
 print('m8b is', m8hemo)
 print('m9b is', m9hemo)
+
+
+

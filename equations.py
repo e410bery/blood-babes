@@ -13,14 +13,18 @@ estgraph = np.zeros(cycle.size)
 est = np.zeros(time.size)
 prog = np.zeros(cycle.size)
 #iron acc:
-ironRep = np.zeros(time.size)
+#ironRep = np.zeros(time.size)    initial: acc = in-out-con
 ironStor = np.zeros(time.size)
-for i in range(ironStor.size):
-    ironStor[i]= 250;
-ironROB = np.zeros(time.size)
-#hemo acc:
-hemoStor = np.zeros(time.size)
+ironStor[0] = (c.m2iron + c.m6hemo) - (c.m4hemo + c.m5hemo) - c.conIron
 
+#ironROB = np.zeros(time.size)
+
+#hemo acc:
+#hemoStor = np.zeros(time.size)
+hemo6 = np.zeros(time.size)
+hemo6[0] = c.m6hemo
+hemo9 = np.zeros(time.size)
+hemo9[0] = c.m9hemo
 #hep mass in storage:
 hep = np.zeros(time.size)
 
@@ -40,11 +44,11 @@ for i in range(cycle.size) :
         estgraph[i] = 2.5*(cycle[i]-16)**2 + 50
     else:
         estgraph[i] = -2.3*(cycle[i]-22.7)**2 + 108
-#estrogen just during menstruation
+#estrogen just during menstruation - also converts est from pg/L to mg/dL
 for i in range(time.size) :
-    est[i] = -220*(time[i]-14)*np.e**(.8*(time[i]-14)) + 50
+    est[i] = c.bloodflowQ*0.0001*(-220*(time[i]-14)*np.e**(.8*(time[i]-14)) + 50)
 
-#progesterone: .5 ng/mL base amt, peaks (21 days, 20 ng/mL)
+#progesterone: .5 ug/L base amt, peaks (21 days, 20 ug/L)
 for i in range(cycle.size) :
     prog[i] = 20*np.e**(-((cycle[i]-21)/4)**2)
 
@@ -55,23 +59,26 @@ for i in range(cycle.size) :
 #only tracking accumulation
 #small intestine: no acc of anything, nothing to track.
 
-for i in range(time.size) :
+#initial value for hepcidin: 
+hep[0] = c.hepIron*blossrate[0] + 1220000 + c.hepEst*est[0] + 0.678
+
+for i in range(time.size-1) :
     #STORAGE:
-    #iron acc = in -out
-    ironStor[i] = c.m2iron*time[i] + c.m6iron*time[i] - c.m4hemo*time[i] - c.m5hemo*time[i]
-    #hemo acc=in-out
-    #hemoStor[i] = c.m2hemo*time[i] + c.m6hemo*time[i] - c.m4hemo*time[i] - c.m5hemo*time[i]
-    #hep is downregulated by estrogen and upregulated by high iron.
-    hep[i] = 5.02 - est[i]/0.891 
-    if (ironStor[i]>c.ironMax) :
-        hep[i]+=c.hepUp*(ironStor[i] - c.ironMax)
-    if (ironStor[i]<c.ironMin) :
-        hep[i]-=c.hepDown*(c.ironMin - ironStor[i])
+    ironStor[i+1] = ironStor[i] - c.ironHep*blossrate[i]*time[0]    
+    #hemo 
+    hemo6[i+1] = hemo6[i]-blossrate[i]*time[i]
+    hemo9[i+1] = hemo9[i]-blossrate[i]*time[i]
+    #hep is downregulated by estrogen and downregulated by low iron.
+    hep[i+1] = hep[i] + c.hepEst*est[i]
+    #if iron falls below normal/initial storage level, 
+    if (ironStor[i]<ironStor[0]) : 
+        hep[i+1] = hep[i] + c.hepIron*(ironStor[0] - ironStor[i])
 
 
 print("times: ", time[::28])
 print("iron in storage: ", ironStor[::28])
 print("hep: ", hep[::28])
+print("hemo6: ", hemo6[::28])
 print("est: ", est[::28])
 
 
