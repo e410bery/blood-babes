@@ -15,8 +15,8 @@ prog = np.zeros(cycle.size)
 #iron acc:
 #ironRep = np.zeros(time.size)    initial: acc = in-out-con
 ironStor = np.zeros(time.size)
-#ironStor[0] = (c.m2iron + c.m6hemo) - (c.m4hemo + c.m5hemo) - c.conIron
-ironStor[0] = 25000000
+#ironStor[0] = (c.m2iron + c.base_m6hemo) - (c.m4hemo + c.m5hemo) - c.conIron
+ironStor[0] = 250
 #ironROB = np.zeros(time.size)
 
 #hemo acc:
@@ -61,21 +61,21 @@ for i in range(cycle.size) :
 #small intestine: no acc of anything, nothing to track.
 
 #initial value for hepcidin: 
-hep[0] = c.hepIron*blossrate[0] + 1220000 + c.hepEst*est[0] + 0.678
+hep[0] = c.hepIron*hemo6[0] + 1220000 + c.hepEst*est[0] + 0.678
 
 for i in range(time.size-1) :
     #STORAGE:
-    ironStor[i+1] = ironStor[i] - c.ironHep*hep[i]*time[i]  + c.genIron
+    ironStor[i+1] = c.ironHep*hep[i]*time[i]  - 3275.1
 
     #hemo 
-    hemo6[i+1] = hemo6[i]-blossrate[i]*time[i]
-    hemo9[i+1] = hemo9[i]-blossrate[i]*time[i]
+
+    hemo9[i+1] = (c.m4hemo + c.m8hemo -blossrate[i])*time[i]
+    hemo6[i+1] = (c.m3hemo  + hemo9[i] + c.m5hemo - c.m8hemo)*time[i]
 
     #hep is downregulated by estrogen and downregulated by low iron.
-    hep[i+1] = hep[i] + c.hepEst*est[i]*time[i]
+    hep[i+1] = c.hepEst*est[i]*time[i] + 0.678
     #if iron falls below normal/initial storage level, hep is decreased.
-    if (ironStor[i]<ironStor[0]) : 
-        hep[i+1] = hep[i] + c.hepIron*(blossrate[i])*time[i] # or ironStor[0] - ironStor[i]
+    hep[i+1] = c.hepIron*(hemo6[i])*time[i] +1220000 # or ironStor[0] - ironStor[i]
 
 
 print("times: ", time[::28])

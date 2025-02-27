@@ -14,7 +14,7 @@ plt.xlabel("time (days)")
 plt.ylabel("Stored (mg)")
 plt.legend()
 plt.savefig("storage")
-#plt.show()
+plt.show()
 plt.close()
 
 #estrogen vs hepcidin linear
