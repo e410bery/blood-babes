@@ -43,8 +43,11 @@ for i in range(cycle.size) :
         estgraph[i] = -220*(cycle[i]-14)*np.e**(.8*(cycle[i]-14)) + 50
     elif cycle[i]>14 and cycle[i]<=20 :
         estgraph[i] = 2.5*(cycle[i]-16)**2 + 50
-    else:
+    elif cycle[i]<27.7 :
         estgraph[i] = -2.3*(cycle[i]-22.7)**2 + 108
+    else :
+        estgraph[i] = estgraph[0]
+
 #estrogen just during menstruation - also converts est from pg/L to mg/dL
 for i in range(time.size) :
     est[i] = c.bloodflowRepQ*0.0001*(-220*(time[i]-14)*np.e**(.8*(time[i]-14)) + 50)
@@ -61,7 +64,7 @@ for i in range(cycle.size) :
 #small intestine: no acc of anything, nothing to track.
 
 #initial value for hepcidin: 
-hep[0] = c.hepIron*(c.m4hemo+c.m5hemo)*.00343 + 25.75 + c.hepEst*est[0] + 0.678
+hep[0] = c.hepIron*(0)*.00343 + 25.75 + c.hepEst*est[0] + 0.678
 blossrate[0] = 0 #day 0 of cycle, no bloodlost.
 
 for i in range(1,time.size) :
@@ -69,11 +72,11 @@ for i in range(1,time.size) :
     hemo9[i] = (c.m4hemo + c.m8hemo -blossrate[i])
     hemo6[i] = (c.m3hemo  + hemo9[i] + c.m5hemo - c.m8hemo)
     
-    hep[i] = 25.75 + c.hepEst*est[0] + 0.678
+    hep[i] = c.hepIron*blossrate[i] + 25.75 + c.hepEst*est[0] + 0.678 
 
     
     #STORAGE:
-    ironStor[i] = ironStor[i-1] + c.ironHep*hep[i] +186.7
+    ironStor[i] = c.ironHep*hep[i]
 
     #hemo 
 
@@ -86,7 +89,7 @@ for i in range(1,time.size) :
 print("times: ", time)
 print("iron in storage: ", ironStor)
 print("hep: ", hep)
-print("hemo6: ", hemo6)
+#print("hemo6: ", hemo6)
 print("est: ", est)
 print("blood: ", blossrate)
 

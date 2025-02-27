@@ -9,7 +9,7 @@ import numpy as np
 #time vs accIron, accEstrogen, hepcidin in storage
 plt.plot(e.time, e.ironStor, label='iron')
 plt.plot(e.time, e.est, label='estrogen')
-#plt.plot(e.time, e.hep, label="hepcidin")
+plt.plot(e.time, e.hep, label="hepcidin")
 plt.xlabel("time (days)")
 plt.ylabel("Stored (mg)")
 plt.legend()
@@ -18,7 +18,7 @@ plt.show()
 plt.close()
 
 #estrogen vs hepcidin linear
-plt.plot(e.est, -0.891*e.est+0.678)
+plt.plot(e.est, -0.891*e.est+e.hep[0])
 plt.xlabel("Estrogen Present (mg)")
 plt.ylabel("Change in Hepcidin (mg)")
 plt.title("Estimated Relationship of Estrogen and Hepcidin")
@@ -34,8 +34,8 @@ ax1.plot(e.time, e.est, color=color)
 ax1.tick_params(axis='y', labelcolor='black')
 ax2 = ax1.twinx()  
 color = 'blue'
-ax2.set_ylabel('Hepcidin (mg)', color=color)  
-ax2.plot(e.time, -.891*e.est+0.678, color=color)
+ax2.set_ylabel('Change in Hepcidin (mg)', color=color)  
+ax2.plot(e.time, -.891*e.est+e.hep[0], color=color)
 ax2.tick_params(axis='y', labelcolor='black')
 fig.tight_layout()  
 plt.xticks([1,2,3,4,5,6])
@@ -84,7 +84,7 @@ plt.xticks([1,4,8,12,16,20,24,28])
 plt.axvspan(0, 6, facecolor='red', alpha=0.2)
 plt.text(.1,14, "Menstruation");
 plt.title('Hormone Variation Over Cycle')
-#plt.savefig("hormones.png", bbox_inches="tight")
+plt.savefig("hormones.png", bbox_inches="tight")
 #plt.show()
 
 #blood loss over time during cycle
