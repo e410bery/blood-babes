@@ -9,7 +9,7 @@ import numpy as np
 #time vs accIron, accEstrogen, hepcidin in storage
 plt.plot(e.time, e.ironStor, label='iron')
 plt.plot(e.time, e.est, label='estrogen')
-plt.plot(e.time, e.hep, label="hepcidin")
+#plt.plot(e.time, e.hep, label="hepcidin")
 plt.xlabel("time (days)")
 plt.ylabel("Stored (mg)")
 plt.legend()

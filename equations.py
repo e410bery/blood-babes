@@ -5,7 +5,7 @@ import initial_numbers as c
 #ironMR = c.bloodflowQ*c.ironC
 
 #~~~~~~~~~~~  lists ~~~~~~~~~~#
-time = np.linspace(1,6,num=141) #6 days , list values in hours.
+time = np.linspace(1,6,num=6) #6 days , list values in hours.
 cycle = np.linspace(1, 28, num=200) #28 days
 blossrate = np.zeros(time.size)
 totalblost = np.zeros(time.size)
@@ -61,28 +61,28 @@ for i in range(cycle.size) :
 #small intestine: no acc of anything, nothing to track.
 
 #initial value for hepcidin: 
-hep[0] = c.hepIron*hemo6[0] + 1220000 + c.hepEst*est[0] + 0.678
+hep[0] = c.hepIron*ironStor[0] + 1220000 + c.hepEst*est[0] + 0.678
 
 for i in range(time.size-1) :
     #STORAGE:
-    ironStor[i+1] = c.ironHep*hep[i]*time[i]  - 3275.1
+    ironStor[i+1] = c.ironHep*hep[i]  
 
     #hemo 
 
-    hemo9[i+1] = (c.m4hemo + c.m8hemo -blossrate[i])*time[i]
-    hemo6[i+1] = (c.m3hemo  + hemo9[i] + c.m5hemo - c.m8hemo)*time[i]
+    hemo9[i+1] = hemo9[i] + (c.m4hemo + c.m8hemo -blossrate[i])
+    hemo6[i+1] = hemo6[i] + (c.m3hemo  + hemo9[i] + c.m5hemo - c.m8hemo)
 
     #hep is downregulated by estrogen and downregulated by low iron.
-    hep[i+1] = c.hepEst*est[i]*time[i] + 0.678
+    hep[i+1] = hep[i] + c.hepEst*est[i] + 0.678
     #if iron falls below normal/initial storage level, hep is decreased.
-    hep[i+1] = c.hepIron*(hemo6[i])*time[i] +1220000 # or ironStor[0] - ironStor[i]
+    hep[i+1] += c.hepIron*(hemo6[i]) # or ironStor[0] - ironStor[i]
 
 
-print("times: ", time[::28])
-print("iron in storage: ", ironStor[::28])
-print("hep: ", hep[::28])
-print("hemo6: ", hemo6[::28])
-print("est: ", est[::28])
+print("times: ", time)
+print("iron in storage: ", ironStor)
+print("hep: ", hep)
+print("hemo6: ", hemo6)
+print("est: ", est)
 
 
 
