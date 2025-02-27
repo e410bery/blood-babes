@@ -16,7 +16,11 @@ prog = np.zeros(cycle.size)
 #ironRep = np.zeros(time.size)    initial: acc = in-out-con
 ironStor = np.zeros(time.size)
 #ironStor[0] = (c.m2iron + c.base_m6hemo) - (c.m4hemo + c.m5hemo) - c.conIron
-ironStor[0] = 250 #mg
+if c.anem == False:
+    ironStor[0] = 250 #mg
+
+if c.anem==True:
+    ironStor[0] = 150
 #ironROB = np.zeros(time.size)
 
 #hemo acc:
@@ -69,10 +73,10 @@ blossrate[0] = 0 #day 0 of cycle, no bloodlost.
 
 for i in range(1,time.size) :
     
-    hemo9[i] = (c.m4hemo + c.m8hemo -blossrate[i])
+    hemo9[i] = (c.m4hemo + c.m8hemo - 0.42*blossrate[i]) #42% of blood is hemoglobin
     hemo6[i] = (c.m3hemo  + hemo9[i] + c.m5hemo - c.m8hemo)
     
-    hep[i] = c.hepIron*blossrate[i] + 25.75 + c.hepEst*est[0] + 0.678 
+    hep[i] = c.hepIron*0.42*blossrate[i] + 25.75 + c.hepEst*est[0] + 0.678  #42% of blood is hemoglobin
 
     
     #STORAGE:
