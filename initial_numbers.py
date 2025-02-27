@@ -42,10 +42,10 @@ genIron = c #changes to accommmodate the fluctuations in accumulation in storage
 accEst = c #accumulation of estrogen in the reproductive system, varies per day
 
 #relationships between hepcidin/iron/estrogen (normal) - all of these values should be calculated from the lists in the for loops
-hepIron = -7298/3#*m7hemo + 1220000 #mg/day, used to calculate the amount of hepcidin based on amount of hemoglobin leaving through menstruation, changes daily
+hepIron = -0.138#*m7hemo + 25.75 #mg/day, used to calculate the amount of hepcidin based on amount of hemoglobin leaving through menstruation, changes daily
 hepEst = -0.891#*accEst + 0.678 #mg/day, used to calculate the amount of hepcidin based on the amount of estrogen
 hepTotal = hepIron + hepEst #total hepcidin per day
-ironHep = -0.00137/3#*hepTotal - 3275.4 #total iron in storage
+ironHep = -7.26#*hepTotal +186.98 #total iron in storage
 
 
 #normal values that are most relevant to graphing
