@@ -3,7 +3,7 @@
 
 
 #boolean controls which state we are in.
-anem = True
+anem = False
 
 z = 1 #placeholder
 c = 1 #placeholder to signal a value that changes based on day in the cycle

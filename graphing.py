@@ -18,7 +18,7 @@ plt.show()
 plt.close()
 
 #time vs accIron, accEstrogen, hepcidin in storage
-fig, (ax1, ax2, ax3) = plt.subplots(3, figsize=(6, 8))
+fig, (ax1, ax2) = plt.subplots(2, figsize=(6, 8))
 ax1.set_xlabel('Time (day)')
 ax1.set_ylabel('Iron in Storage (mg)')
 ax1.plot(e.time, e.ironStor)
@@ -26,21 +26,14 @@ ax1.tick_params(axis='y', labelcolor='black')
 ax1.set_xticks(range(0, 7))  # Set tick positions
 ax1.set_xticklabels(['0','1', '2', '3', '4', '5', '6'])  # Set tick labels
 
+
 ax2.set_xlabel('Time (day)')
-ax2.set_ylabel('Estrogen in Reproductive System (mg)')
-ax2.plot(e.time, e.est, color = 'orange')
-ax2.tick_params(axis='y', labelcolor='black')
-ax2.set_xticks(range(0, 7))  # Set tick positions
-ax2.set_xticklabels(['0', '1', '2', '3', '4', '5', '6'])
-
-
-ax3.set_xlabel('Time (day)')
-ax3.set_ylabel('Hepcidin in Storage (mg)')
-ax3.plot(e.time, e.hep, color='green')  # Remove the negative sign
+ax2.set_ylabel('Hepcidin in Storage (mg)')
+ax2.plot(e.time, e.hep, color='green')  # Remove the negative sign
 #ax3.tick_params(axis='y', labelcolor='black')
-ax3.set_xticks(range(0, 7))
-ax3.tick_params(axis='y', labelcolor='black')
-ax3.set_xticklabels(['0', '1', '2', '3', '4', '5', '6'])
+ax2.set_xticks(range(0, 7))
+ax2.tick_params(axis='y', labelcolor='black')
+ax2.set_xticklabels(['0', '1', '2', '3', '4', '5', '6'])
 #ax3.set_ylim(max(e.hep), min(e.hep))  # Reverse the order of limits
 #ax3.set_yticklabels([abs(tick) for tick in ax3.get_yticks()])
 fig.tight_layout()
