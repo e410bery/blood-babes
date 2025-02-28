@@ -9,7 +9,7 @@ import numpy as np
 #time vs accIron, accEstrogen, hepcidin in storage
 plt.plot(e.time, e.ironStor, label='iron')
 plt.plot(e.time, e.est, label='estrogen')
-plt.plot(e.time, -(e.hep), label="hepcidin")
+plt.plot(e.time, e.hep, label="hepcidin")
 plt.xlabel("time (days)")
 plt.ylabel("Stored (mg)")
 plt.legend()
@@ -37,14 +37,12 @@ ax2.set_xticklabels(['0', '1', '2', '3', '4', '5', '6'])
 ax3.set_xlabel('Time (day)')
 ax3.set_ylabel('Hepcidin in Storage (mg)')
 ax3.plot(e.time, e.hep, color='green')  # Remove the negative sign
-ax3.tick_params(axis='y', labelcolor='black')
+#ax3.tick_params(axis='y', labelcolor='black')
 ax3.set_xticks(range(0, 7))
+ax3.tick_params(axis='y', labelcolor='black')
 ax3.set_xticklabels(['0', '1', '2', '3', '4', '5', '6'])
-ax3.set_ylim(max(e.hep), min(e.hep))  # Reverse the order of limits
-ax3.set_yticklabels([abs(tick) for tick in ax3.get_yticks()])
-plt.show()
-
-
+#ax3.set_ylim(max(e.hep), min(e.hep))  # Reverse the order of limits
+#ax3.set_yticklabels([abs(tick) for tick in ax3.get_yticks()])
 fig.tight_layout()
 plt.savefig("EstHepIron.png", bbox_inches="tight")  # Ensure file extension
 plt.show()  # Display the figure
@@ -75,30 +73,49 @@ plt.title("Estrogen and Hepcidin Relationship")
 plt.savefig("estHep", bbox_inches="tight")
 plt.show()
 
+if c.anem == False:
 #iron and hepcidin relationship
-fig, ax1 = plt.subplots()
-color = 'red'
-ax1.set_xlabel('Time (day)')
-ax1.set_ylabel('Iron Lost (mg)', color=color)
-ax1.plot(e.time, 0.42*e.blossrate, color=color)
-ax1.tick_params(axis='y', labelcolor='black')
-ax2 = ax1.twinx()  
-color = 'blue'
-ax2.set_ylabel('Hepcidin (mg)', color=color)  
-ax2.plot(e.time, -0.138*(0.42*e.blossrate) + 25.75, color=color)
-ax2.tick_params(axis='y', labelcolor='black')
-fig.tight_layout()  
-plt.xticks([1,2,3,4,5,6])
-plt.title("Iron and Hepcidin Relationship")
-plt.savefig("ironHep", bbox_inches="tight")
-plt.show()
+    fig, ax1 = plt.subplots()
+    color = 'red'
+    ax1.set_xlabel('Time (day)')
+    ax1.set_ylabel('Iron Lost (mg)', color=color)
+    ax1.plot(e.time, 0.42*e.blossrate, color=color)
+    ax1.tick_params(axis='y', labelcolor='black')
+    ax2 = ax1.twinx()  
+    color = 'blue'
+    ax2.set_ylabel('Hepcidin (mg)', color=color)  
+    ax2.plot(e.time, -0.138*(0.42*e.blossrate) + 25.75, color=color)
+    ax2.tick_params(axis='y', labelcolor='black')
+    fig.tight_layout()  
+    plt.xticks([1,2,3,4,5,6])
+    plt.title("Iron and Hepcidin Relationship")
+    plt.savefig("ironHep", bbox_inches="tight")
+    plt.show()
 
+if c.anem == True:
+    fig, ax1 = plt.subplots()
+    color = 'red'
+    ax1.set_xlabel('Time (day)')
+    ax1.set_ylabel('Iron Lost (mg)', color=color)
+    ax1.plot(e.time, 0.42*e.blossrate, color=color)
+    ax1.tick_params(axis='y', labelcolor='black')
+    ax2 = ax1.twinx()  
+    color = 'blue'
+    ax2.set_ylabel('Hepcidin (mg)', color=color)  
+    ax2.plot(e.time, -0.138/2*(0.42*e.blossrate) + 25.75/2, color=color)
+    ax2.tick_params(axis='y', labelcolor='black')
+    fig.tight_layout()  
+    plt.xticks([1,2,3,4,5,6])
+    plt.title("Iron and Hepcidin Relationship")
+    plt.savefig("ironHep", bbox_inches="tight")
+    plt.show()
 
 
 #total iron in blood over time (6 days)
 plt.plot(e.time, e.ironStor)
 plt.xlabel("time (days)")
 plt.ylabel("iron in storage (mg)")
+plt.savefig("totalIron")
 plt.show()
 
 #'''#hormone variation over menstrual cycle

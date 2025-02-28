@@ -20,7 +20,7 @@ if c.anem == False:
     ironStor[0] = 250 #mg
 
 if c.anem==True:
-    ironStor[0] = 150
+    ironStor[0] = 100
 #ironROB = np.zeros(time.size)
 
 #hemo acc:
@@ -68,15 +68,22 @@ for i in range(cycle.size) :
 #small intestine: no acc of anything, nothing to track.
 
 #initial value for hepcidin: 
-hep[0] = c.hepIron*(0)*.00343 + 25.75 + c.hepEst*est[0] + 0.678
+if c.anem == False:
+    hep[0] = c.hepIron*(0)*.00343 + 25.75 + c.hepEst*est[0] + 0.678
+if c.anem == True:
+    hep[0] = c.hepIron*(0)*.00343 + 25.75/2 + c.hepEst*est[0] + 0.678
+
 blossrate[0] = 0 #day 0 of cycle, no bloodlost.
 
 for i in range(1,time.size) :
     
     hemo9[i] = (c.m4hemo + c.m8hemo - 0.42*blossrate[i]) #42% of blood is hemoglobin
     hemo6[i] = (c.m3hemo  + hemo9[i] + c.m5hemo - c.m8hemo)
-    
-    hep[i] = c.hepIron*0.42*blossrate[i] + 25.75 + c.hepEst*est[0] + 0.678  #42% of blood is hemoglobin
+
+    if c.anem == False:
+        hep[i] = c.hepIron*0.42*blossrate[i] + 25.75 + c.hepEst*est[0] + 0.678  #42% of blood is hemoglobin
+    if c.anem == True:
+        hep[i] = c.hepIron*0.42*blossrate[i] + 25.75/2 + c.hepEst*est[0] + 0.678  #42% of blood is hemoglobin
 
     
     #STORAGE:
