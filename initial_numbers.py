@@ -72,14 +72,9 @@ print('the base value for m6b is', base_m6hemo)
 print('m1a is', m1iron)
 print('m2a is', m2iron)
 print('m3a is', m3iron)
-print('m10a is', m10iron)
-print('m11b is', m11hemo)
-print('m2b is', m2hemo)
-print('m3b is', m3hemo)
 print('m4b is', m4hemo)
 print('m5b is', m5hemo)
-print('m8b is', m8hemo)
-print('m9b is', m9hemo)
+print('m6hemo is', m6hemo)
 
 
 
