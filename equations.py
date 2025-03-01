@@ -15,6 +15,7 @@ prog = np.zeros(cycle.size)
 #iron acc:
 #ironRep = np.zeros(time.size)    initial: acc = in-out-con
 ironStor = np.zeros(time.size)
+genIron = np.zeros(time.size)
 #ironStor[0] = (c.m2iron + c.base_m6hemo) - (c.m4hemo + c.m5hemo) - c.conIron
 if c.anem == False:
     ironStor[0] = 250 #mg
@@ -83,9 +84,13 @@ for i in range(1,time.size) :
     if c.anem == True:
         hep[i] = c.hepIron*0.42*blossrate[i] + 25.75/2 + c.hepEst*est[0] + 0.678  #42% of blood is hemoglobin
 
-    
+
     #STORAGE:
     ironStor[i] = c.ironHep*hep[i]
+    genIron[i] = ironStor[i] - c.m2iron + c.conIron
+
+    #generation term calculation
+
 
     #hemo 
 
@@ -101,6 +106,7 @@ print("hep: ", hep)
 #print("hemo6: ", hemo6)
 print("est: ", est)
 print("blood: ", blossrate)
+print("genIron:", genIron)
 
 
 
