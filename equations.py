@@ -47,10 +47,8 @@ for i in range(cycle.size) :
         estgraph[i] = -220*(cycle[i]-14)*np.e**(.8*(cycle[i]-14)) + 50
     elif cycle[i]>14 and cycle[i]<=20 :
         estgraph[i] = 2.5*(cycle[i]-16)**2 + 50
-    elif cycle[i]<27.7 :
-        estgraph[i] = -2.3*(cycle[i]-22.7)**2 + 108
     else :
-        estgraph[i] = estgraph[0]
+        estgraph[i] = 58*np.e**((-1/7)*(cycle[i]-21.5)**2) +50
 
 #estrogen just during menstruation - also converts est from pg/L to mg/dL
 for i in range(time.size) :
@@ -58,7 +56,7 @@ for i in range(time.size) :
 
 #progesterone: .5 ug/L base amt, peaks (21 days, 20 ug/L)
 for i in range(cycle.size) :
-    prog[i] = 20*np.e**(-((cycle[i]-21)/4)**2)
+    prog[i] = 20*np.e**(-((cycle[i]-20.8)/3)**2)
 
 
 #~~~~~~~~~~ mass balance equations ~~~~~~~~~#

@@ -3,7 +3,7 @@
 
 
 #boolean controls which state we are in.
-anem = True
+anem = False
 
 z = 1 #placeholder
 c = 1 #placeholder to signal a value that changes based on day in the cycle
@@ -35,7 +35,7 @@ m5hemo = 0.85*(m2iron + m2hemo) #mg/day
 m10iron = m3iron #mg/day
 m6hemo = c #calculated like the base value is, but m9hemo changes per day (actual calculations are in equations.py)
 m7hemo = c #mg/day
-m8hemo = 1958400 #mg/day
+m8hemo = 20160000 #mg/day
 m9hemo = c #calculated like the base value is, but m6hemo changes per day
 conIron = 25 #mg/day
 genIron = c #changes to accommmodate the fluctuations in accumulation in storage
