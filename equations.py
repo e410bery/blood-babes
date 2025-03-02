@@ -18,10 +18,9 @@ if c.anem == False:
 
 if c.anem==True:
     ironStor[0] = 100
-#ironROB = np.zeros(time.size)
 
-#hemo acc:
-#hemoStor = np.zeros(time.size)
+
+
 hemo6 = np.zeros(time.size)
 hemo6[0] = c.base_m6hemo
 hemo9 = np.zeros(time.size)
@@ -88,9 +87,6 @@ for i in range(1,time.size) :
     #generation term calculation
 
 
-    #hemo 
-
-
     #hep is downregulated by estrogen and downregulated by low iron.
     #if iron falls below normal/initial storage level, hep is decreased.
     # or ironStor[0] - ironStor[i]
@@ -99,12 +95,13 @@ for i in range(1,time.size) :
 print("times: ", time)
 print("iron in storage: ", ironStor)
 print("hep: ", hep)
-#print("hemo6: ", hemo6)
 print("est: ", est)
 print("blood: ", blossrate)
 print("genIron:", genIron)
 print("m6b is", hemo6)
 print("m9b is", hemo9)
+print(np.max(estgraph))
+print(np.max(prog))
 
 
 
