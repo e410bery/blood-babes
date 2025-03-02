@@ -1,8 +1,7 @@
-#import initial_numbers as c
+
 import numpy as np
 import initial_numbers as c
 #equations: (use c.--- to use variables defined in initial numbers file.
-#ironMR = c.bloodflowQ*c.ironC
 
 #~~~~~~~~~~~  lists ~~~~~~~~~~#
 time = np.linspace(0,6,num=7) #7 days , list values in days.
@@ -12,11 +11,8 @@ totalblost = np.zeros(time.size)
 estgraph = np.zeros(cycle.size)
 est = np.zeros(time.size)
 prog = np.zeros(cycle.size)
-#iron acc:
-#ironRep = np.zeros(time.size)    initial: acc = in-out-con
 ironStor = np.zeros(time.size)
 genIron = np.zeros(time.size)
-#ironStor[0] = (c.m2iron + c.base_m6hemo) - (c.m4hemo + c.m5hemo) - c.conIron
 if c.anem == False:
     ironStor[0] = 250 #mg
 
@@ -107,6 +103,8 @@ print("hep: ", hep)
 print("est: ", est)
 print("blood: ", blossrate)
 print("genIron:", genIron)
+print("m6b is", hemo6)
+print("m9b is", hemo9)
 
 
 
