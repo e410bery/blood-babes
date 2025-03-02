@@ -37,7 +37,7 @@ for i in range(time.size) :
     blossrate[i] = 12*np.e**(-((time[i]-1)/3)**2)
 totalblost = np.cumsum(blossrate)
 
-#estrogen: piecewise starting at 50pg/L, peaking (14 days, 150 pg/L) and (23 days, )
+#estrogen: piecewise starting at 50pg/mL, peaking (14 days, 150 pg/mL) and (23 days, ~110 pg/mL)
 for i in range(cycle.size) :
     if(cycle[i]<14) : #0-14 days
         estgraph[i] = -220*(cycle[i]-14)*np.e**(.8*(cycle[i]-14)) + 50
@@ -46,7 +46,7 @@ for i in range(cycle.size) :
     else :
         estgraph[i] = 58*np.e**((-1/7)*(cycle[i]-21.5)**2) +50
 
-#estrogen just during menstruation - also converts est from pg/L to mg/dL
+#estrogen just during menstruation - also converts est from to mg/dL
 for i in range(time.size) :
     est[i] = c.bloodflowRepQ*0.0001*(-220*(time[i]-14)*np.e**(.8*(time[i]-14)) + 50)
 
