@@ -3,6 +3,10 @@ import constants as c
 
 
 #enzyme reactions:
+#vmax also = k2*E0
+def enzyme_subtrate(sub, vmax, km) :
+    return (vmax * sub) / (km + sub)
+
 def competitive_inhibition(sub, vmax, km, inhibitor, ki):
     return (vmax * sub) / (km * (1 + inhibitor / ki) + sub)
 

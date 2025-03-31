@@ -8,5 +8,28 @@ if (syrup is True):
 else:
     sert = c;
 
+#intake:
+dexIn = [0, c, c, c] #none, normal, some, a lot. 
+trypIn = c
+csyIn = c
+maoiIn = c
 
-sertKm = 0.3 #.2-.5 mM, taking S back into prenueron
+#out
+csyOut = c
+maoiOut = c
+
+
+#liver/kidney:
+
+
+#absorbtion:
+
+
+#movement:
+
+#ES binding:
+#trp -> S
+
+
+#inhibition:
+sertDexKi = 40 #nmoles
