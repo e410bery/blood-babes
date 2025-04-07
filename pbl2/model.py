@@ -1,20 +1,16 @@
-import constants as c
-import equations as e
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
-vmax = 
-km = 
-ki = 
-inhibitor = 
-sub0 = 
-P0 = 
+vmax = 1
+km = 1
+ki = 1
+inhibitor = 1
+sub0 = 1
+P0 = 1
 
 initial_conditions = [P0, sub0]
-t = np.linspace(0, 1000, 1000) 
+t = np.linspace(0, 50, 50) 
 
 def solver(t,y):
     P, sub = y
@@ -27,8 +23,9 @@ plt.plot(t, solution.y[0], label='[S*]')
 plt.plot(t, solution.y[1], label='[S]')
 plt.xlabel('Time (sec)')
 plt.ylabel('Concentration')
-plt.title('S* Concentration in the Synaptic Cleft Over Time')
+plt.title('S* Concentration and S Concentration as a Product of Serotonin Metabolism')
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
