@@ -19,14 +19,10 @@ def inhibitor(time):
 def competitive_inhibition(sub, vmax, km, ki, time):
     return (vmax * sub) / (km * (1 + inhibitor(time) / ki) + sub)
 
-def uncompetitive_inhibition(sub, vmax, km, inhibitor, ki):
-    return (vmax * sub) / (km + sub * (1 + inhibitor / ki))
 
 def noncompetitive_inhibition(sub, vmax, km, inhibitor, ki):
     return (vmax * sub) / ((km + sub) * (1 + inhibitor / ki))
 
-def mixed_inhibition(sub, vmax, km, inhibitor, ki, ki_prime):
-    return (vmax * sub) / ((km * (1 + inhibitor / ki)) + sub * (1 + inhibitor / ki_prime))
 
 ''' 
 #check inhibitor conc:
