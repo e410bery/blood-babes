@@ -1,3 +1,5 @@
+import numpy as np
+
 case = 0
 #Case 0: No CSY, No MAOI, MDD
 #Case 1: No CSY, Normal MAOI, MDD
@@ -10,7 +12,8 @@ case = 0
 
 #Stream Constants 
 c = 1 #asking questions 
-d = 1 #things we calculate in the code 
+d = 1 #things we calculate in the code
+time = np.linspace(0, 50, 50) 
 
 #Molar Masses
 DXM_MM = 2.71e2 #g/mol

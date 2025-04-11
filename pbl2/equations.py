@@ -2,6 +2,8 @@ import constants as c
 import numpy as np
 import matplotlib.pyplot as plt
 
+time = c.time
+
 #enzyme reactions:
 #vmax also = k2*E0
 def enzyme_subtrate(sub, vmax, km) :
@@ -61,4 +63,4 @@ dS_maoi_maoA = competitive_inhibition(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoA
 dS_maoi_maoB = competitive_inhibition(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoB, c.Ki_maoi_maoB, time)
 dS_star_dt = dS_maoA + dS_maoB 
 
-S_star_conc = solve_ivp(solver, [0,1000], initial_conditions, t_eval=t, method='BDF')
+
