@@ -86,14 +86,6 @@ DXM_5 = DXM_4
 S_6 = S_5
 MAOI_6 = MAOI_5
 
-#Stream 7
-DXM_7 = c #depends on how much CSY entering synaptic cleft binds, when it unbinds?? 
-
-#Stream 8
-S_star_8 = c
-MAOI_8 = c
-DXM_8 = DXM_7
-
 #Stream 9
 S_9 = c
 

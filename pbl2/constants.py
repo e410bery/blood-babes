@@ -71,33 +71,25 @@ DXM_4 = DXM_2 #mol/day
 MAOI_4 = MAOI_2 #mol/day
 S_4 = S_reactor #mol/day
 
-#Stream 5
+#Stream 5 #ELLA please consider that the DXM half life is 2 hours, these numebrs are the amount of S passing thru SERT when DXM is all there at t = 0, please figure out how to model these as functions of time 
 if case == 0 or case == 1 or case == 2: 
     S_5 = 2.56e-15 #mole/neuron*sec #constant we mathematically dervied for maximum serotonin passing through 
 elif case == 3:
-    S_5 = c #percentage of 2.56e-15 depending on saturation 
+    S_5 = 0.9925*2.56e-15 #percentage of 2.56e-15 depending on saturation 
 elif case == 4:
-    S_5 = c #percentage of 2.56e-15 depending on saturation 
+    S_5 = 0.75*2.56e-15 #percentage of 2.56e-15 depending on saturation 
 elif case == 5:
-    S_5 = c #percentage of 2.56e-15 depending on saturation 
+    S_5 = 0.5*2.56e-15 #percentage of 2.56e-15 depending on saturation 
 elif case == 6:
-    S_5 = c #percentage of 2.56e-15 depending on saturation 
+    S_5 = 0.25*2.56e-15 #percentage of 2.56e-15 depending on saturation 
 elif case == 7:
-    S_5 = c #percentage of 2.56e-15 depending on saturation 
+    S_5 = 0 #percentage of 2.56e-15 depending on saturation 
 MAOI_5 = MAOI_4 
 DXM_5 = DXM_4
 
 #Stream 6
 S_6 = S_5
 MAOI_6 = MAOI_5
-
-#Stream 7
-DXM_7 = c #depends on how much CSY entering synaptic cleft binds, when it unbinds?? 
-
-#Stream 8
-S_star_8 = d #solve ivp MAOI brain B 
-MAOI_8 = d #inhibitor time function 
-DXM_8 = DXM_7
 
 #Stream 9
 S_9 = c #negative feedback loop - Geena Luise 
@@ -109,7 +101,7 @@ Vmax_maoA = 21.7 #nmoles/mg/hr
 Vmax_maoB = 21.7 #nmoles/mg/hr 
 Ki_maoi_maoA = 0.0373 #mM
 Ki_maoi_maoB = 0.0136 #mM
-Serotonin_conc_B = d #find somewhere in spreadsheet #do first 
+Serotonin_conc_B = S_6 / S_cells #moles per cell 
 
 
 

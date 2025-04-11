@@ -1,6 +1,7 @@
 import constants as c
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
 
 time = c.time
 
@@ -53,14 +54,68 @@ def competitive_inhibition(sub, vmax, km, ki, time):
 
 #MAOI is a competitive Inhibitor 
 
+#Brain B Model: 
+
 #case 0: No MAOI 
 dS_maoA = enzyme_substrate(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoA) #returns ds*/dt
 dS_maoB = enzyme_substrate(c.Serotonin_conc_B, c.Vmax_maoB, c.Km_maoB) #returns ds*/dt
 dS_star_dt = dS_maoA + dS_maoB
 
+#Plotting S* vs. S concentration case 0
+if c.case == 0: 
+    sub0 = c.Serotonin_conc_B 
+    P0 = 0
+    initial_conditions = [P0, sub0]
+    t = np.linspace(0, 50, 50) 
+
+    def solver(t,y):
+        S_star, sub = y
+        dS_maoA = enzyme_substrate(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoA) #returns ds*/dt
+        dS_maoB = enzyme_substrate(c.Serotonin_conc_B, c.Vmax_maoB, c.Km_maoB) #returns ds*/dt
+        dS_star_dt = dS_maoA + dS_maoB
+        dS_dt = -dS_star_dt
+        return[dS_star_dt, dS_dt]
+    S_star_8 = solve_ivp(solver, [0,1000], initial_conditions, t_eval=t, method='BDF')
+#cases 1-7
+else:  
+    sub0 = c.Serotonin_conc_B
+    P0 = 0
+    initial_conditions = [P0, sub0]
+    t = np.linspace(0, 50, 50) 
+
+    def solver(t,y):
+        S_star, sub = y
+        dS_maoi_maoA = competitive_inhibition(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoA, c.Ki_maoi_maoA, time)
+        dS_maoi_maoB = competitive_inhibition(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoB, c.Ki_maoi_maoB, time)
+        dS_star_dt = dS_maoi_maoA + dS_maoi_maoB 
+        dS_dt = -dS_star_dt
+        return[dS_star_dt, dS_dt]
+    S_star_8 = solve_ivp(solver, [0,1000], initial_conditions, t_eval=t, method='BDF')
+
+
+solution = solve_ivp(solver, [0,1000], initial_conditions, t_eval=t, method='BDF')
+plt.plot(t, solution.y[0], label='[S*]')
+plt.plot(t, solution.y[1], label='[S]')
+plt.xlabel('Time (sec)')
+plt.ylabel('Concentration')
+plt.title('S* Concentration and S Concentration as a Product of Serotonin Metabolism')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+
+
+'''
 #cases 1-7: MAOI 
 dS_maoi_maoA = competitive_inhibition(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoA, c.Ki_maoi_maoA, time)
 dS_maoi_maoB = competitive_inhibition(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoB, c.Ki_maoi_maoB, time)
 dS_star_dt = dS_maoA + dS_maoB 
+'''
+#Stream 7
+DXM_7 = c #depends on how much CSY entering synaptic cleft binds, when it unbinds?? 
 
-
+#Stream 8
+S_star_8 = c
+MAOI_8 = c
+DXM_8 = DXM_7
