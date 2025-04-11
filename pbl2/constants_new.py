@@ -55,7 +55,7 @@ trp_2 = trp_in #mol/day #Assume all trp consumed goes to Reactor
 #Stream 3
 CSY_3 = ((CSY_in * CSY_Density * 1000) - (DXM_conc * CSY_in)) #mg/day
 DXM_3 = c #should be equal to DXM_8 
-MAOI_3 = c #should be equal to MAOI_8 #use half life? 
+MAOI_3 = c #should be equal to MAOI_8 #use half life? #using inhibitor(time)
 
 #Reactor
 trp_reactor = (0.02*trp_in)/1000/trp_MM #mol/day
@@ -125,38 +125,10 @@ Serotonin_to_brain = 5.52e-7 #mol/day
 MAOI_to_brain = 2.25e-4 #mol/day
 
 
-Serotonin_conc = #2.56e-15 #mol/neuron
+Serotonin_conc = 2.56e-15 #mol/neuron
 MAOI_conc = 60 #mg 
 
 #Storage Box 
 S_acc = S_4 - S_5 + S_9 
 
 
-#Brain B Model: Serotonin Metabolism
-def enzyme_substrate(sub, vmax, km) :
-    return (vmax * sub) / (km + sub)
-
-def inhibitor(time):
-    time = time%24
-    inh_mg = c.MAOI_conc*(0.5)**(time/2) - 0.0146
-    inh_moles = inh_mg*(1/1000)*(1/133.19)
-    return inh_moles
-
-#m-m model to find rate of product concentration
-#time in hours 
-def competitive_inhibition(sub, vmax, km, ki, time):
-    return (vmax * sub) / (km * (1 + inhibitor(time) / ki) + sub)
-
-#MAOI is a competitive Inhibitor 
-
-#case 0: No MAOI 
-dS_maoA = enzyme_substrate(Serotonin_conc, Vmax_maoA, Km_maoA) #returns ds*/dt
-dS_maoB = enzyme_substrate(Serotonin_conc, Vmax_maoB, Km_maoB) #returns ds*/dt
-dS_star_dt = dS_maoA + dS_maoB
-
-#cases 1-7: MAOI 
-dS_maoi_maoA = competitive_inhibition(Serotonin_conc, Vmax_maoA, Km_maoA, Ki_maoi_maoA, time)
-dS_maoi_maoB = competitive_inhibition(Serotonin_conc, Vmax_maoA, Km_maoB, Ki_maoi_maoB, time)
-dS_star_dt = dS_maoA + dS_maoB 
-
-S_star_conc = solve_ivp(solver, [0,1000], initial_conditions, t_eval=t, method='BDF')
