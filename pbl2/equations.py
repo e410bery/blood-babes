@@ -37,22 +37,11 @@ plt.plot(time, inh)
 plt.show()
 '''
 
-#Brain B Model: Serotonin Metabolism
+#Brain B Model: Serotonin Metabolism #delete later we r not using for real
 def enzyme_substrate(sub, vmax, km) :
     return (vmax * sub) / (km + sub)
 
-def inhibitor(time):
-    time = time%24
-    inh_mg = c.MAOI_conc*(0.5)**(time/2) - 0.0146
-    inh_moles = inh_mg*(1/1000)*(1/133.19)
-    return inh_moles
 
-#m-m model to find rate of product concentration
-#time in hours 
-def competitive_inhibition(sub, vmax, km, ki, time):
-    return (vmax * sub) / (km * (1 + inhibitor(time) / ki) + sub)
-
-#MAOI is a competitive Inhibitor 
 
 #Brain B Model: 
 
@@ -81,17 +70,16 @@ else:
     sub0 = c.Serotonin_conc_B
     P0 = 0
     initial_conditions = [P0, sub0]
-    t = np.linspace(0, 50, 50) 
+    t = np.linspace(0, 7, 7)
 
     def solver(t,y):
         S_star, sub = y
-        dS_maoi_maoA = competitive_inhibition(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoA, c.Ki_maoi_maoA, time)
-        dS_maoi_maoB = competitive_inhibition(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoB, c.Ki_maoi_maoB, time)
-        dS_star_dt = dS_maoi_maoA + dS_maoi_maoB 
+        dS_maoi_maoA = (c.Vmax_maoA * sub ) / (c.Km_maoA * (1 + c.MAOI_2 / c.Ki_maoi_maoA) + sub)
+        dS_maoi_maoB = (c.Vmax_maoB * sub ) / (c.Km_maoB * (1 + c.MAOI_2 / c.Ki_maoi_maoB) + sub)
+        dS_star_dt = dS_maoi_maoA + dS_maoi_maoB
         dS_dt = -dS_star_dt
         return[dS_star_dt, dS_dt]
     S_star_8 = solve_ivp(solver, [0,1000], initial_conditions, t_eval=t, method='BDF')
-
 
 solution = solve_ivp(solver, [0,1000], initial_conditions, t_eval=t, method='BDF')
 plt.plot(t, solution.y[0], label='[S*]')
