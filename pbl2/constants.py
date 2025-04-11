@@ -97,8 +97,8 @@ S_9 = c #negative feedback loop - Geena Luise
 #Brain B - Serotonin Metabolism 
 Km_maoA = 0.192 #mM
 Km_maoB = 0.192 #mM
-Vmax_maoA = 21.7 #nmoles/mg/hr 
-Vmax_maoB = 21.7 #nmoles/mg/hr 
+Vmax_maoA = 21.7*24*10e-6 #mmoles/mg/hr 
+Vmax_maoB = 21.7*24*10e-6 #mmoles/mg/hr 
 Ki_maoi_maoA = 0.0373 #mM
 Ki_maoi_maoB = 0.0136 #mM
 Serotonin_conc_B = S_6 / S_cells #moles per cell 
