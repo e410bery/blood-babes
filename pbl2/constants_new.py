@@ -49,7 +49,6 @@ elif case == 7:
 
 #Stream 2
 DXM_2 = (DXM_conc * CSY_in) / 1000 / DXM_MM #mol/day
-DXM_2 = 8.29e-05 #mol/day
 MAOI_2 = MAOI_in / 1000 / MAOI_MM #mg/day #Assume all MAOI consumed goes to Reactor/Brain
 trp_2 = trp_in #mol/day #Assume all trp consumed goes to Reactor 
 
