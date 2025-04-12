@@ -26,17 +26,6 @@ def noncompetitive_inhibition(sub, vmax, km, inhibitor, ki):
     return (vmax * sub) / ((km + sub) * (1 + inhibitor / ki))
 
 
-'''
-#check inhibitor conc:
-time = np.linspace(0,71, 72)
-inh = np.zeros(time.size)
-for t in time:
-    inh = inhibitor(time)
-
-plt.plot(time, inh)
-plt.show()
-'''
-
 #Brain B Model: Serotonin Metabolism #delete later we r not using for real
 def enzyme_substrate(sub, vmax, km) :
     return (vmax * sub) / (km + sub)
@@ -64,6 +53,7 @@ if c.case == 0:
         dS_star_dt = dS_maoA + dS_maoB
         dS_dt = -dS_star_dt
         return[dS_star_dt, dS_dt]
+    print(solver)
     S_star_8 = solve_ivp(solver, [0,1000], initial_conditions, t_eval=t, method='BDF')
 #cases 1-7
 else:  
@@ -79,8 +69,10 @@ else:
         dS_star_dt = dS_maoi_maoA + dS_maoi_maoB
         dS_dt = -dS_star_dt
         return[dS_star_dt, dS_dt]
+    print(solver)
     S_star_8 = solve_ivp(solver, [0,1000], initial_conditions, t_eval=t, method='BDF')
 
+print(solver)
 solution = solve_ivp(solver, [0,1000], initial_conditions, t_eval=t, method='BDF')
 plt.plot(t, solution.y[0], label='[S*]')
 plt.plot(t, solution.y[1], label='[S]')

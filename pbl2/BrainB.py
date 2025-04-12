@@ -3,7 +3,6 @@ from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 import constants as c
 
-c.case = 1
 
 Vmax = c.Vmax_maoA               # mmol/mg*hr
 
@@ -47,12 +46,12 @@ def MAO_enzyme_reaction(t, y):
     return [dS_dt, dP_dt]
 
 
-
-t_span = (0, 24)
+#t_span = (0, 24) #real
+t_span = (0, 240) #see longer term equations in action
 t_eval = np.linspace(t_span[0], t_span[1], 500)
 
 if c.case == 0:
-    sol = solve_ivp(MAO_enzyme_reaction, t_span, initial_conditions, t_eval=t_eval)
+    sol = solve_ivp(MAO_enzyme_reaction, t_span, initial_conditions, t_eval=t_eval, method="Radau")
     plt.figure(figsize=(10,8))
     plt.plot(sol.t, sol.y[0], label='[Serotonin]', color='tab:blue')
     plt.plot(sol.t, sol.y[1], label='[Degraded Serotonin]', color='tab:green')
@@ -60,7 +59,7 @@ if c.case == 0:
     plt.title('Serotonin Breakdown Over 24 Hours')
     plt.legend()
     plt.grid(True)
-    plt.show()
+    plt.savefig("pbl2/graphs/brainB_case0.png")
     S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
     print(S_star_8)
 
@@ -84,6 +83,7 @@ else:
     plt.grid(True)
 
     plt.tight_layout()
-    plt.show()
+    filepath = "pbl2/graphs/brainB_case" + str(c.case) + ".png"
+    plt.savefig(filepath)
     S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
     print(S_star_8)
