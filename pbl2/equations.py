@@ -27,29 +27,35 @@ def noncompetitive_inhibition(sub, vmax, km, inhibitor, ki):
 
 
 #Brain B Model: Serotonin Metabolism #delete later we r not using for real
+'''
 def enzyme_substrate(sub, vmax, km) :
     return (vmax * sub) / (km + sub)
+'''
 
 
 
 #Brain B Model: 
 
+#I have no clue what this is for
+'''
 #case 0: No MAOI 
 dS_maoA = enzyme_substrate(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoA) #returns ds*/dt
 dS_maoB = enzyme_substrate(c.Serotonin_conc_B, c.Vmax_maoB, c.Km_maoB) #returns ds*/dt
 dS_star_dt = dS_maoA + dS_maoB
+'''
 
 #Plotting S* vs. S concentration case 0
 if c.case == 0: 
     sub0 = c.Serotonin_conc_B 
     P0 = 0
     initial_conditions = [P0, sub0]
-    t = np.linspace(0, 50, 50) 
+    t = np.linspace(0, 24, 24) 
 
     def solver(t,y):
         S_star, sub = y
-        dS_maoA = enzyme_substrate(c.Serotonin_conc_B, c.Vmax_maoA, c.Km_maoA) #returns ds*/dt
-        dS_maoB = enzyme_substrate(c.Serotonin_conc_B, c.Vmax_maoB, c.Km_maoB) #returns ds*/dt
+        #(vmax * sub) / (km + sub)
+        dS_maoA = (c.Vmax_maoA * sub) / (c.Km_maoA + sub) #returns ds*/dt
+        dS_maoB = (c.Vmax_maoB * sub) / (c.Km_maoB + sub) #returns ds*/dt
         dS_star_dt = dS_maoA + dS_maoB
         dS_dt = -dS_star_dt
         return[dS_star_dt, dS_dt]

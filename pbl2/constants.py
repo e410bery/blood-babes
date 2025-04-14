@@ -1,6 +1,6 @@
 import numpy as np
 
-case = 1
+case = 2
 #Case 0: No CSY, No MAOI, MDD
 #Case 1: No CSY, Normal MAOI, MDD
 #Case 2: No CSY, High Dose of MAOI, MDD
@@ -54,7 +54,7 @@ elif case == 7:
 
 #Stream 2
 DXM_2 = (DXM_conc * CSY_in) / 1000 / DXM_MM #mol/day
-MAOI_2 = MAOI_in / 1000 / MAOI_MM #mg/day #Assume all MAOI consumed goes to Reactor/Brain
+MAOI_2 = MAOI_in / 1000 / MAOI_MM #mol/day #Assume all MAOI consumed goes to Reactor/Brain
 trp_2 = trp_in #mol/day #Assume all trp consumed goes to Reactor 
 
 #Stream 3
@@ -99,9 +99,9 @@ Km_maoA = 0.192 #mM
 Km_maoB = 0.192 #mM
 Vmax_maoA = 21.7*24*10e-6 #mmoles/mg/hr 
 Vmax_maoB = 21.7*24*10e-6 #mmoles/mg/hr 
-Ki_maoi_maoA = 0.0373 #mM
-Ki_maoi_maoB = 0.0136 #mM
-Serotonin_conc_B = S_6 / S_cells #moles per cell 
+Ki_maoi_maoA = 0.0373 / S_cells #mM per cell
+Ki_maoi_maoB = 0.0136 / S_cells #mM per cell
+Serotonin_conc_B = S_6 / S_cells *1000 #millimoles per cell 
 
 
 

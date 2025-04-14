@@ -6,8 +6,8 @@ import constants as c
 
 Vmax = c.Vmax_maoA               # mmol/mg*hr
 
-enzyme_per_cell = 1  # mg/cell 
-Vmax_cell = Vmax * enzyme_per_cell / 1000  # mol/cell/day
+enzyme_per_cell = 1 # mg/cell #where did this come from? little confusing
+Vmax_cell = Vmax * enzyme_per_cell  # mmol/ cell*hr
 
 Km = c.Km_maoA                   # mM
 Ki = c.Ki_maoi_maoA              # mM
@@ -20,14 +20,14 @@ def MAOI_inhibitor(t):
     decay = 0.5 ** (t / 2)
     MAOI_mg = (c.MAOI_in) * decay
     MAOI_mol = MAOI_mg / 1000 / c.MAOI_MM
-    MAOI_mol_cell = MAOI_mol / c.S_cells
-    return MAOI_mol_cell 
+    MAOI_mol_cell = MAOI_mol / c.S_cells * 1000 #mmol/cell
+    return MAOI_mol_cell #mol/cell
 
 def MAOI_inhibitor_2(t):
     decay = 0.5 ** (t / 2)
     MAOI_mg = 60 * decay
     MAOI_mol = MAOI_mg / 1000 / c.MAOI_MM
-    MAOI_mol_cell = MAOI_mol / c.S_cells
+    MAOI_mol_cell = MAOI_mol / c.S_cells * 1000 #mmol/cell
     return MAOI_mol_cell
 
 def MAOI_competitive_inhibition(t, y):
@@ -36,18 +36,19 @@ def MAOI_competitive_inhibition(t, y):
     v = Vmax_cell * S / (Km * (1 + I / Ki) + S)
     dS_dt = -v
     dP_dt = v
+    print(I)
     return [dS_dt, dP_dt]
 
 def MAO_enzyme_reaction(t, y):
     S, P = y
-    v = (Vmax_cell * S) / (Km + S)  # mol/cell/day
+    v = (Vmax_cell * S) / (Km + S)  # mmol/cell/day
     dS_dt = -v
     dP_dt = v
     return [dS_dt, dP_dt]
 
 
 #t_span = (0, 24) #real
-t_span = (0, 240) #see longer term equations in action
+t_span = (0, 24) #see longer term equations in action
 t_eval = np.linspace(t_span[0], t_span[1], 500)
 
 if c.case == 0:
@@ -55,7 +56,7 @@ if c.case == 0:
     plt.figure(figsize=(10,8))
     plt.plot(sol.t, sol.y[0], label='[Serotonin]', color='tab:blue')
     plt.plot(sol.t, sol.y[1], label='[Degraded Serotonin]', color='tab:green')
-    plt.ylabel('Concentration (mol/cell)')
+    plt.ylabel('Concentration (mmol/cell)')
     plt.title('Serotonin Breakdown Over 24 Hours')
     plt.legend()
     plt.grid(True)
@@ -65,20 +66,20 @@ if c.case == 0:
 
 else:
     sol = solve_ivp(MAOI_competitive_inhibition, t_span, initial_conditions, t_eval=t_eval)
-    I_vals = [MAOI_inhibitor_2(t) for t in t_eval]
+    I_vals = [MAOI_inhibitor(t) for t in t_eval]
 
     plt.figure(figsize=(10, 8))
     plt.subplot(2, 1, 1)
     plt.plot(sol.t, sol.y[0], label='[Serotonin]', color='tab:blue')
     plt.plot(sol.t, sol.y[1], label='[Degraded Serotonin]', color='tab:green')
-    plt.ylabel('Concentration (mol/cell)')
+    plt.ylabel('Concentration (mmol/cell)')
     plt.title('Serotonin Breakdown Over 24 Hours')
     plt.legend()
     plt.grid(True)
     plt.subplot(2, 1, 2)
     plt.plot(t_eval, I_vals, label='[MAOI]', color='tab:purple', linestyle='--')
     plt.xlabel('Time (hours)')
-    plt.ylabel('Concentration (mol/cell)')
+    plt.ylabel('Concentration (mmol/cell)')
     plt.legend()
     plt.grid(True)
 
@@ -87,3 +88,5 @@ else:
     plt.savefig(filepath)
     S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
     print(S_star_8)
+
+print(Ki)
