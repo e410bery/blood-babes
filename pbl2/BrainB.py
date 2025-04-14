@@ -2,6 +2,7 @@ import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 import constants as c
+import BrainA as A
 
 
 Vmax = c.Vmax_maoA               # mmol/mg*hr
@@ -11,7 +12,7 @@ Vmax_cell = Vmax * enzyme_per_cell  # mmol/ cell*hr
 
 Km = c.Km_maoA                   # mM
 Ki = c.Ki_maoi_maoA              # mM
-S0 = c.Serotonin_conc_B          # mM
+S0 = A.ser_sert          # mM
 S_star0 = 0.0                    # mM
 initial_conditions = [S0, S_star0]
 
