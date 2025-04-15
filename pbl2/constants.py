@@ -1,6 +1,6 @@
 import numpy as np
 
-case = 1
+case = 7
 #Case 0: No CSY, No MAOI, MDD
 #Case 1: No CSY, Normal MAOI, MDD
 #Case 2: No CSY, High Dose of MAOI, MDD
@@ -102,7 +102,7 @@ Vmax_maoB = 21.7*24*10e-6 #mmoles/mg/hr
 Ki_maoi_maoA = 0.0373 / S_cells #mM per cell
 Ki_maoi_maoB = 0.0136 / S_cells #mM per cell
 Serotonin_conc_B = S_6 / S_cells *1000 #millimoles per cell 
-
+print(Serotonin_conc_B)
 
 
 

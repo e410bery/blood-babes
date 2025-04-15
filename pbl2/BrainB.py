@@ -12,10 +12,10 @@ Vmax_cell = Vmax * enzyme_per_cell  # mmol/ cell*hr
 
 Km = c.Km_maoA                   # mM
 Ki = c.Ki_maoi_maoA              # mM
-S0 = A.ser_sert          # mM
+TF = A.TF                        #dictionary of transport factors of serotonin
+S0 = A.S0             # mM, for each time value over 24 hours (dictionary= time:ser_sert)
 S_star0 = 0.0                    # mM
 initial_conditions = [S0, S_star0]
-
 
 def MAOI_inhibitor(t):
     decay = 0.5 ** (t / 2)
@@ -33,22 +33,26 @@ def MAOI_inhibitor_2(t):
 
 def MAOI_competitive_inhibition(t, y):
     S, P = y
+    closest_key = min(TF.keys(), key=lambda k: abs(k - t))
+    transport_factor = TF[closest_key]
     I = MAOI_inhibitor(t)
-    v = Vmax_cell * S / (Km * (1 + I / Ki) + S)
+    #v = Vmax_cell * S / (Km * (1 + I / Ki) + S)
+    v = (Vmax * S * transport_factor) / (Km * (1+ I / Ki) + S)
     dS_dt = -v
     dP_dt = v
-    print(I)
     return [dS_dt, dP_dt]
 
 def MAO_enzyme_reaction(t, y):
     S, P = y
-    v = (Vmax_cell * S) / (Km + S)  # mmol/cell/day
+    closest_key = min(TF.keys(), key=lambda k: abs(k - t))
+    transport_factor = TF[closest_key]
+    #v = (Vmax_cell * S) / (Km + S)  # mmol/cell/day
+    v = (Vmax * S * transport_factor) / (Km + S)
     dS_dt = -v
     dP_dt = v
     return [dS_dt, dP_dt]
 
 
-#t_span = (0, 24) #real
 t_span = (0, 24) #see longer term equations in action
 t_eval = np.linspace(t_span[0], t_span[1], 500)
 
@@ -90,4 +94,4 @@ else:
     S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
     print(S_star_8)
 
-print(Ki)
+
