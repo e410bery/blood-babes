@@ -17,9 +17,9 @@ for time in t:
 acc = (S_9 - S_5 + S_4) * 500000 #accumulation in the brain
 
 
-print(acc)
+#print(acc)
 
 plt.figure(figsize = (10, 8))
 plt.plot(t, acc)
-plt.show()
+#plt.show()
 

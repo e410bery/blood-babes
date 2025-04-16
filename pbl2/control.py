@@ -1,9 +1,12 @@
 import constants as c
-import BrainB as B
+import accumulation as A
 
-cases = [0,1,2]
+#change case in constants.
+#this will find accumlation values and save them onto the output.txt file to be parsed and graphed.
 
-for c in cases:
-    #get and save data for each case, then graph generically
-    continue;
+with open("output.txt", "a") as file:
+    file.write(str(c.case) + ":")
+    file.write(','.join(str(a) for a in A.acc))
+    file.write('\n')
+
 
