@@ -56,6 +56,7 @@ def MAO_enzyme_reaction(t, y):
 t_span = (0, 24) #see longer term equations in action
 t_eval = np.linspace(t_span[0], t_span[1], 500)
 
+Deg_Ser = []
 if c.case == 0:
     sol = solve_ivp(MAO_enzyme_reaction, t_span, initial_conditions, t_eval=t_eval, method="Radau")
     plt.figure(figsize=(10,8))
@@ -67,6 +68,7 @@ if c.case == 0:
     plt.grid(True)
     plt.savefig("pbl2/graphs/brainB_case0.png")
     S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
+    Deg_Ser = sol.y[1]
     print("S*: ",S_star_8)
 
 else:
@@ -87,11 +89,16 @@ else:
     plt.ylabel('Concentration (mmol/cell)')
     plt.legend()
     plt.grid(True)
+    Deg_Ser = sol.y[1]
 
     plt.tight_layout()
     filepath = "pbl2/graphs/brainB_case" + str(c.case) + ".png"
     plt.savefig(filepath)
+
+
     S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
     print("S*: ",S_star_8)
+print(Deg_Ser)
 
-
+print("Max value of Deg_Ser:", np.max(Deg_Ser))
+print("Min value of Deg_Ser:", np.min(Deg_Ser))
