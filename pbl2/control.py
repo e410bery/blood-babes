@@ -1,5 +1,7 @@
 import constants as c
-import accumulation as A
+import BrainA as A
+import BrainB as B
+import accumulation as Acc
 
 #change case in constants.
 #this will find accumlation values and save them onto the output.txt file to be parsed and graphed.
@@ -17,7 +19,7 @@ STEPS TO MAKE NEW GRAPH WITH MULTIPLE CASES:
 
 with open("output.txt", "a") as file:
     file.write(str(c.case) + ":")
-    file.write(','.join(str(a) for a in A.acc)) #<- change A.acc to whatever u need to graph.
+    file.write(','.join(str(a) for a in B.Ser)) #<- change last thing to whatever u need to graph.
     file.write('\n')
 
 

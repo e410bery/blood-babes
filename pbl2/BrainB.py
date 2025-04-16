@@ -24,13 +24,6 @@ def MAOI_inhibitor(t):
     MAOI_mol_cell = MAOI_mol / c.S_cells * 1000 #mmol/cell
     return MAOI_mol_cell #mol/cell
 
-def MAOI_inhibitor_2(t):
-    decay = 0.5 ** (t / 2)
-    MAOI_mg = 60 * decay
-    MAOI_mol = MAOI_mg / 1000 / c.MAOI_MM
-    MAOI_mol_cell = MAOI_mol / c.S_cells * 1000 #mmol/cell
-    return MAOI_mol_cell
-
 def MAOI_competitive_inhibition(t, y):
     S, P = y
     closest_key = min(TF.keys(), key=lambda k: abs(k - t))
@@ -57,6 +50,7 @@ t_span = (0, 24) #see longer term equations in action
 t_eval = np.linspace(t_span[0], t_span[1], 500)
 
 Deg_Ser = []
+Ser = []
 if c.case == 0:
     sol = solve_ivp(MAO_enzyme_reaction, t_span, initial_conditions, t_eval=t_eval, method="Radau")
     plt.figure(figsize=(10,8))
@@ -69,7 +63,7 @@ if c.case == 0:
     plt.savefig("pbl2/graphs/brainB_case0.png")
     S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
     Deg_Ser = sol.y[1]
-    print("S*: ",S_star_8)
+    Ser = sol.y[0]
 
 else:
     sol = solve_ivp(MAOI_competitive_inhibition, t_span, initial_conditions, t_eval=t_eval)
@@ -90,6 +84,7 @@ else:
     plt.legend()
     plt.grid(True)
     Deg_Ser = sol.y[1]
+    Ser = sol.y[0]
 
     plt.tight_layout()
     filepath = "pbl2/graphs/brainB_case" + str(c.case) + ".png"
@@ -98,7 +93,3 @@ else:
 
     S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
     print("S*: ",S_star_8)
-print(Deg_Ser)
-
-print("Max value of Deg_Ser:", np.max(Deg_Ser))
-print("Min value of Deg_Ser:", np.min(Deg_Ser))

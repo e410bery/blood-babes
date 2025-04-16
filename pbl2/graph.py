@@ -16,14 +16,14 @@ for label, values in dict.items():
     plt.plot(time, values, label=label)
 
 # Add labels and legend
-plt.xlabel("Time")
-plt.ylabel("Value")
-plt.title("Cases Over Time")
+plt.xlabel("Time (hr)")
+plt.ylabel("Serotonin in Nueron")
+plt.title("Impact of Maoi on Serotonin")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
 
 #change name to savefig:
-name = "accumulationAllCases" # <- edit this
+name = "serInNueron" # <- edit this
 figname = "pbl2/graphs/" + name
 plt.savefig(figname)
