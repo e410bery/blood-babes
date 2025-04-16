@@ -16,7 +16,7 @@ TF = A.TF                        #dictionary of transport factors of serotonin
 S0 = A.S0             # mM, for each time value over 24 hours (dictionary= time:ser_sert)
 S_star0 = 0.0                    # mM
 initial_conditions = [S0, S_star0]
-
+print("S):", S0)
 def MAOI_inhibitor(t):
     decay = 0.5 ** (t / 2)
     MAOI_mg = (c.MAOI_in) * decay
@@ -67,7 +67,7 @@ if c.case == 0:
     plt.grid(True)
     plt.savefig("pbl2/graphs/brainB_case0.png")
     S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
-    print(S_star_8)
+    print("S*: ",S_star_8)
 
 else:
     sol = solve_ivp(MAOI_competitive_inhibition, t_span, initial_conditions, t_eval=t_eval)
@@ -92,6 +92,6 @@ else:
     filepath = "pbl2/graphs/brainB_case" + str(c.case) + ".png"
     plt.savefig(filepath)
     S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
-    print(S_star_8)
+    print("S*: ",S_star_8)
 
 

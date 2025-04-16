@@ -71,19 +71,21 @@ DXM_4 = DXM_2 #mol/day
 MAOI_4 = MAOI_2 #mol/day
 S_4 = S_reactor #mol/day
 
+#S_5 = 5.12e-21
 #Stream 5 #ELLA please consider that the DXM half life is 2 hours, these numebrs are the amount of S passing thru SERT when DXM is all there at t = 0, please figure out how to model these as functions of time 
 if case == 0 or case == 1 or case == 2: 
-    S_5 = 2.56e-15 #mole/neuron*sec #constant we mathematically dervied for maximum serotonin passing through 
+    S_5 = 5.12e-21 #mole/neuron*sec #constant we mathematically dervied for maximum serotonin passing through 
 elif case == 3:
-    S_5 = 0.9925*2.56e-15 #percentage of 2.56e-15 depending on saturation 
+    S_5 = 0.9925*5.12e-21 #percentage of 5.12e-21 depending on saturation 
 elif case == 4:
-    S_5 = 0.75*2.56e-15 #percentage of 2.56e-15 depending on saturation 
+    S_5 = 0.75*5.12e-21 #percentage of 5.12e-21 depending on saturation 
 elif case == 5:
-    S_5 = 0.5*2.56e-15 #percentage of 2.56e-15 depending on saturation 
+    S_5 = 0.5*5.12e-21 #percentage of 5.12e-21 depending on saturation 
 elif case == 6:
-    S_5 = 0.25*2.56e-15 #percentage of 2.56e-15 depending on saturation 
+    S_5 = 0.25*5.12e-21 #percentage of 5.12e-21 depending on saturation 
 elif case == 7:
-    S_5 = 0 #percentage of 2.56e-15 depending on saturation 
+    S_5 = 0 #percentage of 5.12e-21 depending on saturation 
+    
 MAOI_5 = MAOI_4 
 DXM_5 = DXM_4
 
@@ -102,7 +104,8 @@ Vmax_maoB = 21.7*24*10e-6 #mmoles/mg/hr
 Ki_maoi_maoA = 0.0373 / S_cells #mM per cell
 Ki_maoi_maoB = 0.0136 / S_cells #mM per cell
 Serotonin_conc_B = S_6 / S_cells *1000 #millimoles per cell 
-print(Serotonin_conc_B)
+brainSat = 0.011*1000 #mmol
+print("S5: ", S_5)
 
 
 
