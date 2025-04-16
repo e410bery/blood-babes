@@ -22,4 +22,8 @@ plt.title("Cases Over Time")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.show()
+
+#change name to savefig:
+name = "accumulationAllCases" # <- edit this
+figname = "pbl2/graphs/" + name
+plt.savefig(figname)
