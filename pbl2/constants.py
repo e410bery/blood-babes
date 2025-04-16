@@ -1,6 +1,6 @@
 import numpy as np
 
-case = 3
+case = 5
 #Case 0: No CSY, No MAOI, MDD
 #Case 1: No CSY, Normal MAOI, MDD
 #Case 2: No CSY, High Dose of MAOI, MDD

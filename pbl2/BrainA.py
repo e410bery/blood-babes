@@ -57,8 +57,6 @@ S0 = c.S_5*60000
 
 
 
-
-
 if (c.case>2) :
     plt.figure(figsize=(10, 8))
     plt.plot(t, DXM)
@@ -87,3 +85,4 @@ if (c.case>2) :
 
 #print("ser_sert:", ser_sert)
 print(ser_sert[0])
+
