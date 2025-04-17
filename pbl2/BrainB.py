@@ -53,6 +53,7 @@ Deg_Ser = []
 Ser = []
 if c.case == 0:
     sol = solve_ivp(MAO_enzyme_reaction, t_span, initial_conditions, t_eval=t_eval, method="Radau")
+    I_vals = np.zeros(t_eval.size)
     plt.figure(figsize=(10,8))
     plt.plot(sol.t, sol.y[0], label='[Serotonin]', color='tab:blue')
     plt.plot(sol.t, sol.y[1], label='[Degraded Serotonin]', color='tab:green')
