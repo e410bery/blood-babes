@@ -75,14 +75,19 @@ S_4 = S_reactor #mol/day
 #Stream 5 #ELLA please consider that the DXM half life is 2 hours, these numebrs are the amount of S passing thru SERT when DXM is all there at t = 0, please figure out how to model these as functions of time 
 if case == 0 or case == 1 or case == 2: 
     S_5 = 5.12e-21 #mole/neuron*sec #constant we mathematically dervied for maximum serotonin passing through 
+    Acc_0 = 0.005*5.12e-21 
 elif case == 3:
     S_5 = 0.9925*5.12e-21 #percentage of 5.12e-21 depending on saturation 
+    Acc_0 = 5.12e-21 - S_5
 elif case == 4:
-    S_5 = 0.75*5.12e-21 #percentage of 5.12e-21 depending on saturation 
+    S_5 = 0.75*5.12e-21 #percentage of 5.12e-21 depending on saturation
+    Acc_0 = 5.12e-21 - S_5 
 elif case == 5:
     S_5 = 0.5*5.12e-21 #percentage of 5.12e-21 depending on saturation 
+    Acc_0 = 5.12e-21 - S_5
 elif case == 6:
     S_5 = 0.25*5.12e-21 #percentage of 5.12e-21 depending on saturation 
+    Acc_0 = 5.12e-21 - S_5
 elif case == 7:
     S_5 = 0 #percentage of 5.12e-21 depending on saturation 
     
