@@ -8,23 +8,27 @@ for line in file:
     key, prevalues = line.split(':')
     values = [float(x) for x in prevalues.strip().split(',')]
     dict[key] = values
-
-
+'''
+for case in dict.keys():
+    print(case)
+    print(dict[case][-1])
+'''
 time = np.linspace(0,24,500)
 # Plot each case
 for label, values in dict.items():
     plt.plot(time, values, label=label)
 
+
 # Add labels and legend
 plt.xlabel("Time (hr)")
-plt.ylabel("Concentration")
-plt.title("MAOI Inhibitor")
+plt.ylabel("Serotonin in Cleft")
+plt.title("accumulation")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
 
 #change name to savefig:
-name = "inhibitor0-2" # <- edit this
+name = "OGaccumulationAllCases.png" # <- edit this
 figname = "pbl2/graphs/" + name
 plt.savefig(figname)
 '''

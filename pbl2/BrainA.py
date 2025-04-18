@@ -3,86 +3,43 @@ from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 import constants as c
 
-t = np.linspace(0, 24, 500)  # 0 to 24 hours
-DXM = [] #DXM in mols/cell
-sat = [] #what percentage of SERTs bound by DXM
 
-#amount of serotonin passing through SERT
-ser_sert =[]
-S0 = c.S_5 * 60000 #mmol/cell/hour
-print("S0: ", c.case, S0)
+# Constants with proper units
+Vmax = 23e-6        # µmol/min
+Km = 1.9e-3       # mM
+Ki = .0084e-3       # mM
+half_life = 2.0     # hours
+I0 = c.DXM_2 * (1000)  /50000     # mmol/cell (initial inhibitor)
+S = c.S_4 * (1000)  /500000          # mmol/cell (substrate)
+# Decay constant for inhibitor
+k_decay = np.log(2) / half_life  # per hour
+dserdt = []
 
-def DXM_inhibitor(t):
-    decay = 0.5 ** (t / 2)
-    DXM_mol = c.DXM_2 * decay
-    DXM_mol_cell = DXM_mol / c.S_cells * 1000
-    DXM_saturation = DXM_mol_cell / (c.brainSat/c.S_cells)
-    if DXM_saturation >= 100:
-        DXM_saturation = 100
-    #calculating the amount of serotonin that is moving through SERT/cell/hour
-    S_new = S0 * ((DXM_saturation)/100)
-    #print((DXM_saturation/100))
-    return DXM_mol_cell, DXM_saturation, S_new  # mmol/cell
+# ODE: dP/dt = v(t)
+def reaction_rate(t, P):
+    I_t = I0 * np.exp(-k_decay * t)
+    v = (Vmax / (1 + (I_t / Ki))) * (S / (Km + S))
+    dserdt.append(v)
+    return v  # µmol/min
 
+# Time span (in hours), convert to minutes for finer resolution
+t_span = (0, 24)  # hours
+t_eval = np.linspace(t_span[0], t_span[1], 500)
 
-for time in t:  
-    if(c.DXM_2 == 0):
-        ser_sert.append(S0)
-        sat.append(0)
-    else:
-        a = DXM_inhibitor(time)[0]
-        DXM.append(a)
-        o = DXM_inhibitor(time)[1]
-        sat.append(o)
-        f = DXM_inhibitor(time)[2]
-        ser_sert.append(f)
+# Solve ODE
+sol = solve_ivp(reaction_rate, t_span, [S], t_eval=t_eval)
 
+# Extract results
+time_hr = sol.t
+product_umol = sol.y[0]
 
-#make ser_sert to give to BrainB:
-t_rounded = [round(time, 5) for time in t]
-sert_dict = {float(t): float(v) for t, v in zip(t_rounded, ser_sert)}
-tfs = []
-for dx in sat:
-    tfs.append(1 - float(dx)/100.0)
-#print(tfs) 
-
-#for BrainB:
-TF = {float(t): float(v) for t, v in zip(t_rounded, tfs)}
-
-
-S0 = c.S_5*60000
-#print(TF)
-
-
-
-
-
-if (c.case>2) :
-    plt.figure(figsize=(10, 8))
-    plt.plot(t, DXM)
-    plt.xlabel('Time (hours)')
-    plt.ylabel('Concentration (mmol/cell)')
-    plt.title('Dextromethorphan Breakdown Over 24 Hours')
-    plt.grid(True)
-    plt.savefig("pbl2/graphs/DexBreakdown.png")
-
-    plt.figure(figsize = (10, 8))
-    plt.plot(t, tfs)
-    plt.xlabel('Time (hours)')
-    plt.ylabel('Saturation (%)')
-    plt.title('Dextromethorphan and Serotonin Saturation Over 24 Hours')
-    plt.grid(True)
-    plt.savefig("pbl2/graphs/DexSaturation.png")
-
-    plt.figure(figsize = (10, 8))
-    plt.plot(t, ser_sert)
-    plt.xlabel('Time (hours)')
-    plt.ylabel('Rate of Serotonin passing (mmol/hr)')
-    plt.title('Amount of Serotonin Passing Through SERT Over 24 Hours')
-    plt.grid(True)
-    plt.savefig("pbl2/graphs/SerotoninSERT.png")
-
-
-#print("ser_sert:", ser_sert)
-print(ser_sert[0])
-
+# Plot product concentration over time
+plt.figure(figsize=(8, 5))
+plt.plot(time_hr, product_umol, label='[P](t)', color='green')
+plt.xlabel('Time (hours)')
+plt.ylabel('Product Concentration (µmol)')
+plt.title('Product Formation Under Noncompetitive Inhibition')
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+#plt.show()
