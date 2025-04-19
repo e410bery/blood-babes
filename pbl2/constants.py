@@ -1,14 +1,14 @@
 import numpy as np
 
-case = 7
+case = 5
 #Case 0: No CSY, No MAOI, MDD
 #Case 1: No CSY, Low MAOI, MDD
 #Case 2: No CSY, Normal MAOI, MDD
 #Case 3: No CSY, High Dose of MAOI, MDD
-#Case 4: Normal CSY, Normal MAOI, MDD
-#Case 5: Moderate 1 CSY, Normal MAOI, MDD
-#Case 6: Moderate 2 CSY, Normal MAOI, MDD
-#Case 7: Moderate 3 CSY, Normal MAOI, MDD
+#Case 4: Low CSY, Normal MAOI, MDD
+#Case 5: Normal CSY, Normal MAOI, MDD
+#Case 6: Moderate 1 CSY, Normal MAOI, MDD
+#Case 7: Moderate 2 CSY, Normal MAOI, MDD
 #Case 8: Extreme CSY, Normal MAOI, MDD - no longer in use
 
 #Stream Constants 
@@ -35,7 +35,7 @@ elif case == 1:
     CSY_in = 0
     MAOI_in = 30 #mg/day
 elif case == 2:
-    CSY_in = 0
+    CSY_in = 7.5
     MAOI_in = 60 #mg/day
 elif case == 3:
     CSY_in = 0
@@ -81,16 +81,16 @@ if case <= 3:
     S_5 = 5.12e-21 #mole/neuron*sec #constant we mathematically dervied for maximum serotonin passing through 
     Acc_0 = 0.005*5.12e-21 
 elif case == 4:
-    S_5 = 0.9925*5.12e-21 #percentage of 5.12e-21 depending on saturation 
+    S_5 = 0.9997*5.12e-21 #percentage of 5.12e-21 depending on saturation 
     Acc_0 = 5.12e-21 - S_5
 elif case == 5:
-    S_5 = 0.75*5.12e-21 #percentage of 5.12e-21 depending on saturation
+    S_5 = 0.9925*5.12e-21 #percentage of 5.12e-21 depending on saturation
     Acc_0 = 5.12e-21 - S_5 
 elif case == 6:
-    S_5 = 0.5*5.12e-21 #percentage of 5.12e-21 depending on saturation 
+    S_5 = 0.25*5.12e-21 #percentage of 5.12e-21 depending on saturation 
     Acc_0 = 5.12e-21 - S_5
 elif case == 7:
-    S_5 = 0.25*5.12e-21 #percentage of 5.12e-21 depending on saturation 
+    S_5 = 0.5*5.12e-21 #percentage of 5.12e-21 depending on saturation 
     Acc_0 = 5.12e-21 - S_5
 elif case == 8:
     S_5 = 0 #percentage of 5.12e-21 depending on saturation 

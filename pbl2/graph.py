@@ -64,7 +64,7 @@ for case in cases:
 # Graph styling
 plt.xlabel("Time (hr)")
 plt.ylabel("Serotonin Concentration in Nueron")
-plt.title("Serotonin (solid) and Degraded Product (dashed) from MAO activity")
+plt.title("Serotonin (solid) and Degraded Product (  ) from MAO activity")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()

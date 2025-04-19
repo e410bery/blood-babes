@@ -19,7 +19,7 @@ STEPS TO MAKE NEW GRAPH WITH MULTIPLE CASES:
 
 with open("output.txt", "a") as file:
     file.write(str(c.case) + ":")
-    file.write(','.join(str(a) for a in B.sol.y[0])) #<- change last thing to whatever u need to graph.
+    file.write(','.join(str(a) for a in Acc.acc)) #<- change last thing to whatever u need to graph.
     file.write('\n')
 
 print("case", c.case, "completed")
