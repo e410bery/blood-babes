@@ -3,6 +3,7 @@ from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 import constants as c
 
+#used for graphing the concentration of serotonin passing through SERT over time
 
 # Constants with proper units
 Vmax = 23e-6        # µmol/min
@@ -15,14 +16,14 @@ S = c.S_4 * (1000)  /500000          # mmol/cell (substrate)
 k_decay = np.log(2) / half_life  # per hour
 dserdt = []
 
-# ODE: dP/dt = v(t)
+# ODE: dP/dt = v(t), calculates the concentration of product (serotonin passing through SERT) over time
 def reaction_rate(t, P):
     I_t = I0 * np.exp(-k_decay * t)
     v = (Vmax / (1 + (I_t / Ki))) * (S / (Km + S))
     dserdt.append(v)
     return v  # µmol/min
 
-# Time span (in hours), convert to minutes for finer resolution
+# Time span (in hours)
 t_span = (0, 24)  # hours
 t_eval = np.linspace(t_span[0], t_span[1], 500)
 
