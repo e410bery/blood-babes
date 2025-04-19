@@ -112,12 +112,13 @@ Vmax_cell = Vmax * enzyme_per_cell  # mmol/ cell*hr
 
 Km = c.Km_maoA                   # mM
 Ki = c.Ki_maoi_maoA              # mM
-S0 = A.product_umol[-1] /1000            # umol -> mmol
+S0 = A.product_umol[-1] / 1000   # umol -> mmol
 S_star0 = 0.0                    # mM
 initial_conditions = [S0, S_star0]
 #print("S):", S0)
 dserdt = []
 dstardt = []
+
 def MAOI_inhibitor(t):
     decay = 0.5 ** (t / 2)
     MAOI_mg = (c.MAOI_in) * decay

@@ -1,0 +1,13 @@
+
+important pngs saved in graphs! at the end, we will delete all the we dont use for the paper. 
+
+need to determine units and titles!
+
+1. Accumulation: OGaccumulation.png made with accumulation.py, list acc. this uses brainAacc and BrainBacc. output saved in acc.txt
+2. BrainA: BrainA_AllCases.png made with BrainA.py, list umol_product. output saved in a.txt
+3. BrainB: BrainB_AllCases.png made with BrainB.py, list sol.y[0]. uses initial conditions from end of BrainA. output saved in b.txt
+4. Ser vs Deg: SerAndDegAllCases.png with BrainB.py, list B.sol.y[0] and B.sol.y[1]. Cases 0-7. output saved in deg.txt 
+               SerAndDegCasesNoDXM.png Cases 0-3. use output from deg.txt.
+
+
+

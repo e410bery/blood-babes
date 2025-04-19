@@ -15,14 +15,15 @@ STEPS TO MAKE NEW GRAPH WITH MULTIPLE CASES:
     -run control.py
     -optional check to make sure the output is saved in output.txt
 4. After running control for all cases, open graph.py, change the name of file at the bottom then run it!
-
 '''
+
 with open("output.txt", "a") as file:
     file.write(str(c.case) + ":")
-    file.write(','.join(str(a) for a in Acc.acc)) #<- change last thing to whatever u need to graph.
+    file.write(','.join(str(a) for a in B.sol.y[0])) #<- change last thing to whatever u need to graph.
     file.write('\n')
 
 print("case", c.case, "completed")
+
 '''
 with open("output.txt", "a") as file:
     # Save Ser
@@ -34,5 +35,5 @@ with open("output.txt", "a") as file:
     file.write(f"{c.case}_DegSer:")
     file.write(','.join(str(a) for a in B.Deg_Ser))
     file.write('\n')
-
+print("case", c.case, "completed")
 '''

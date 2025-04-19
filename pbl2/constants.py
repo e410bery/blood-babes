@@ -1,14 +1,15 @@
 import numpy as np
 
-case = 6
+case = 7
 #Case 0: No CSY, No MAOI, MDD
-#Case 1: No CSY, Normal MAOI, MDD
-#Case 2: No CSY, High Dose of MAOI, MDD
-#Case 3: Normal CSY, Normal MAOI, MDD
-#Case 4: Moderate 1 CSY, Normal MAOI, MDD
-#Case 5: Moderate 2 CSY, Normal MAOI, MDD
-#Case 6: Moderate 3 CSY, Normal MAOI, MDD
-#Case 7: Extreme CSY, Normal MAOI, MDD
+#Case 1: No CSY, Low MAOI, MDD
+#Case 2: No CSY, Normal MAOI, MDD
+#Case 3: No CSY, High Dose of MAOI, MDD
+#Case 4: Normal CSY, Normal MAOI, MDD
+#Case 5: Moderate 1 CSY, Normal MAOI, MDD
+#Case 6: Moderate 2 CSY, Normal MAOI, MDD
+#Case 7: Moderate 3 CSY, Normal MAOI, MDD
+#Case 8: Extreme CSY, Normal MAOI, MDD - no longer in use
 
 #Stream Constants 
 c = 1 #asking questions 
@@ -32,23 +33,26 @@ if case ==0:
     MAOI_in = 0
 elif case == 1:
     CSY_in = 0
-    MAOI_in = 60 #mg/day
+    MAOI_in = 30 #mg/day
 elif case == 2:
     CSY_in = 0
-    MAOI_in = 200 #mg/day (Subject to change)
+    MAOI_in = 60 #mg/day
 elif case == 3:
+    CSY_in = 0
+    MAOI_in = 200 #mg/day (Subject to change)
+elif case == 4:
     CSY_in = 7.5 #mL (one time dose) 
     MAOI_in = 60 #mg/day
-elif case == 4:
+elif case == 5:
     CSY_in = 250 #mL
     MAOI_in = 60 #mg/day 
-elif case == 5:
+elif case == 6:
     CSY_in = 500 #mL
     MAOI_in = 60 #mg/day 
-elif case == 6:
+elif case == 7:
     CSY_in = 750 #mL
     MAOI_in = 60 #mg/day 
-elif case == 7:
+elif case == 8:
     CSY_in = 1000 #mL 
     MAOI_in = 60 #mg/day 
 
@@ -73,22 +77,22 @@ S_4 = S_reactor #mol/day
 
 #S_5 = 5.12e-21
 #Stream 5 #ELLA please consider that the DXM half life is 2 hours, these numebrs are the amount of S passing thru SERT when DXM is all there at t = 0, please figure out how to model these as functions of time 
-if case == 0 or case == 1 or case == 2: 
+if case <= 3: 
     S_5 = 5.12e-21 #mole/neuron*sec #constant we mathematically dervied for maximum serotonin passing through 
     Acc_0 = 0.005*5.12e-21 
-elif case == 3:
+elif case == 4:
     S_5 = 0.9925*5.12e-21 #percentage of 5.12e-21 depending on saturation 
     Acc_0 = 5.12e-21 - S_5
-elif case == 4:
+elif case == 5:
     S_5 = 0.75*5.12e-21 #percentage of 5.12e-21 depending on saturation
     Acc_0 = 5.12e-21 - S_5 
-elif case == 5:
+elif case == 6:
     S_5 = 0.5*5.12e-21 #percentage of 5.12e-21 depending on saturation 
     Acc_0 = 5.12e-21 - S_5
-elif case == 6:
+elif case == 7:
     S_5 = 0.25*5.12e-21 #percentage of 5.12e-21 depending on saturation 
     Acc_0 = 5.12e-21 - S_5
-elif case == 7:
+elif case == 8:
     S_5 = 0 #percentage of 5.12e-21 depending on saturation 
     
 MAOI_5 = MAOI_4 

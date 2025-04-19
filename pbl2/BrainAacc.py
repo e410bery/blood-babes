@@ -56,7 +56,7 @@ TF = {float(t): float(v) for t, v in zip(t_rounded, tfs)}
 
 
 
-if (c.case>2) :
+if (c.case>3) :
     plt.figure(figsize=(10, 8))
     plt.plot(t, DXM)
     plt.xlabel('Time (hours)')

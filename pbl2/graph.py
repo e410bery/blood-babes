@@ -8,11 +8,11 @@ for line in file:
     key, prevalues = line.split(':')
     values = [float(x) for x in prevalues.strip().split(',')]
     dict[key] = values
-'''
-for case in dict.keys():
-    print(case)
-    print(dict[case][-1])
-'''
+
+#for case in dict.keys(): #used to print values
+#    print(case)
+#    print(dict[case][-1])
+
 time = np.linspace(0,24,500)
 # Plot each case
 for label, values in dict.items():
@@ -21,19 +21,19 @@ for label, values in dict.items():
 
 # Add labels and legend
 plt.xlabel("Time (hr)")
-plt.ylabel("Serotonin in Cleft")
-plt.title("accumulation")
+plt.ylabel("Serotonin")
+plt.title("Accumulation in Brain B, Serotonin that leaves without degradation.")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
 
 #change name to savefig:
-name = "OGaccumulationAllCases.png" # <- edit this
+name = "BrainB_AllCases.png" # <- edit this
 figname = "pbl2/graphs/" + name
 plt.savefig(figname)
-'''
 
-# Load the data
+'''
+# Load the data for both ser and degraded ser!
 ser_dict = {}
 degser_dict = {}
 
@@ -57,20 +57,20 @@ colors = {case: color_map(i % 10) for i, case in enumerate(cases)}
 
 # Plot both Ser and DegSer
 for case in cases:
-    plt.plot(time, ser_dict[case], label=f"{case} (Ser)", color=colors[case], linestyle='-')
+    plt.plot(time, ser_dict[case], label=f"{case} ", color=colors[case], linestyle='-')
     if case in degser_dict:
-        plt.plot(time, degser_dict[case], label=f"{case} (DegSer)", color=colors[case], linestyle='--')
+        plt.plot(time, degser_dict[case], label=f"{case} ", color=colors[case], linestyle='--')
 
 # Graph styling
 plt.xlabel("Time (hr)")
-plt.ylabel("Serotonin in Nueron")
-plt.title("Serotonin Concentration")
+plt.ylabel("Serotonin Concentration in Nueron")
+plt.title("Serotonin (solid) and Degraded Product (dashed) from MAO activity")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
 
 # Save the figure
-name = "SerotoninBreakDown0-6"  # <- edit this if you want
+name = "SerAndDegAllCases"  # <- edit this if you want
 figname = "pbl2/graphs/" + name
 plt.savefig(figname)
 '''
