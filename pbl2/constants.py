@@ -41,16 +41,16 @@ elif case == 3:
     CSY_in = 0
     MAOI_in = 200 #mg/day (Subject to change)
 elif case == 4:
-    CSY_in = 7.5 #mL (one time dose) 
+    CSY_in = 3 #mL (one time dose) 
     MAOI_in = 60 #mg/day
 elif case == 5:
-    CSY_in = 250 #mL
+    CSY_in = 7.5 #mL
     MAOI_in = 60 #mg/day 
 elif case == 6:
-    CSY_in = 500 #mL
+    CSY_in = 250 #mL
     MAOI_in = 60 #mg/day 
 elif case == 7:
-    CSY_in = 750 #mL
+    CSY_in = 500 #mL
     MAOI_in = 60 #mg/day 
 elif case == 8:
     CSY_in = 1000 #mL 

@@ -2,10 +2,10 @@ case = 0
 #Case 0: No CSY, No MAOI, MDD
 #Case 1: No CSY, Normal MAOI, MDD
 #Case 2: No CSY, High Dose of MAOI, MDD
-#Case 3: Normal CSY, Normal MAOI, MDD
-#Case 4: Moderate 1 CSY, Normal MAOI, MDD
-#Case 5: Moderate 2 CSY, Normal MAOI, MDD
-#Case 6: Moderate 3 CSY, Normal MAOI, MDD
+#Case 3: Low CSY, Normal MAOI, MDD
+#Case 4: Normal CSY, Normal MAOI, MDD
+#Case 5: Moderate 1 CSY, Normal MAOI, MDD
+#Case 6: Moderate 2 CSY, Normal MAOI, MDD
 #Case 7: Extreme CSY, Normal MAOI, MDD
 
 #Stream Constants 
