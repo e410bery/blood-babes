@@ -48,32 +48,3 @@ for dx in sat:
 
 #for serotonin degradation:
 TF = {float(t): float(v) for t, v in zip(t_rounded, tfs)}
-
-#applies to the cases containing dextromethorphan
-if (c.case>3) :
-    plt.figure(figsize=(10, 8))
-    plt.plot(t, DXM)
-    plt.xlabel('Time (hours)')
-    plt.ylabel('Concentration (mmol/cell)')
-    plt.title('Dextromethorphan Breakdown Over 24 Hours')
-    plt.grid(True)
-    plt.savefig("pbl2/graphs/DexBreakdown.png")
-
-    plt.figure(figsize = (10, 8))
-    plt.plot(t, tfs)
-    plt.xlabel('Time (hours)')
-    plt.ylabel('Saturation (%)')
-    plt.title('Dextromethorphan and Serotonin Saturation Over 24 Hours')
-    plt.grid(True)
-    plt.savefig("pbl2/graphs/DexSaturation.png")
-
-    plt.figure(figsize = (10, 8))
-    plt.plot(t, ser_sert)
-    plt.xlabel('Time (hours)')
-    plt.ylabel('Rate of Serotonin passing (mmol/hr)')
-    plt.title('Amount of Serotonin Passing Through SERT Over 24 Hours')
-    plt.grid(True)
-    plt.savefig("pbl2/graphs/SerotoninSERT.png")
-
-
-print(ser_sert[0])

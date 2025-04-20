@@ -33,14 +33,3 @@ sol = solve_ivp(reaction_rate, t_span, [S], t_eval=t_eval)
 # Extract results
 time_hr = sol.t
 product_umol = sol.y[0]
-
-# Plot product concentration over time
-plt.figure(figsize=(8, 5))
-plt.plot(time_hr, product_umol, label='[P](t)', color='green')
-plt.xlabel('Time (hours)')
-plt.ylabel('Product Concentration (µmol)')
-plt.title('Product Formation Under Noncompetitive Inhibition')
-plt.grid(True)
-plt.legend()
-plt.tight_layout()
-#plt.show()

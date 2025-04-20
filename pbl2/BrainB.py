@@ -5,6 +5,7 @@ import constants as c
 import BrainA as A
 
 #used to calculate and graph the amount of serotonin and degraded serotonin present in the serotonin degradation box over time
+#initial conditions come from output of brainA
 
 Vmax = c.Vmax_maoA               # mmol/mg*hr
 
@@ -52,51 +53,13 @@ def MAO_enzyme_reaction(t, y):
 t_span = (0, 24) 
 t_eval = np.linspace(t_span[0], t_span[1], 500)
 
-Deg_Ser = []
-Ser = []
 
-#solves and plots the IVP when no inhibitor is present
+#solves the IVP when no inhibitor is present
 if c.case == 0:
     sol = solve_ivp(MAO_enzyme_reaction, t_span, initial_conditions, t_eval=t_eval)
     I_vals = np.zeros(t_eval.size)
-    plt.figure(figsize=(10,8))
-    plt.plot(sol.t, sol.y[0], label='[Serotonin]', color='tab:blue')
-    plt.plot(sol.t, sol.y[1], label='[Degraded Serotonin]', color='tab:green')
-    plt.ylabel('Concentration (mmol/cell)')
-    plt.title('Serotonin Breakdown Over 24 Hours')
-    plt.legend()
-    plt.grid(True)
-    plt.savefig("pbl2/graphs/brainB_case0.png")
-    S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
-    Deg_Ser = sol.y[1]
-    Ser = sol.y[0]
-
-#solves and plots the IVP when inhibitor is present
+    
+#solves the IVP when inhibitor is present
 else:
     sol = solve_ivp(MAOI_competitive_inhibition, t_span, initial_conditions, t_eval=t_eval)
     I_vals = [MAOI_inhibitor(t) for t in t_eval]
-
-    plt.figure(figsize=(10, 8))
-    plt.subplot(2, 1, 1)
-    plt.plot(sol.t, sol.y[0], label='[Serotonin]', color='tab:blue')
-    plt.plot(sol.t, sol.y[1], label='[Degraded Serotonin]', color='tab:green')
-    plt.ylabel('Concentration (mmol/cell)')
-    plt.title('Serotonin Breakdown Over 24 Hours')
-    plt.legend()
-    plt.grid(True)
-    plt.subplot(2, 1, 2)
-    plt.plot(t_eval, I_vals, label='[MAOI]', color='tab:purple', linestyle='--')
-    plt.xlabel('Time (hours)')
-    plt.ylabel('Concentration (mmol/cell)')
-    plt.legend()
-    plt.grid(True)
-    Deg_Ser = sol.y[1]
-    Ser = sol.y[0]
-
-    plt.tight_layout()
-    filepath = "pbl2/graphs/brainB_case" + str(c.case) + ".png"
-    plt.savefig(filepath)
-
-
-    S_star_8 = sol.y[1,-1]  #total amount of S_star created per day
-    print("S*: ",S_star_8)

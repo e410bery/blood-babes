@@ -1,6 +1,7 @@
 import numpy as np
 
-case = 5
+case = 7 #user input to control case used by the model
+
 #Case 0: No CSY, No MAOI, MDD
 #Case 1: No CSY, Low MAOI, MDD
 #Case 2: No CSY, Normal MAOI, MDD
@@ -11,10 +12,6 @@ case = 5
 #Case 7: Moderate 2 CSY, Normal MAOI, MDD
 #Case 8: Extreme CSY, Normal MAOI, MDD - no longer in use
 
-#Stream Constants 
-c = 1 #asking questions 
-d = 1 #things we calculate in the code
-time = np.linspace(0, 50, 50) 
 
 #Molar Masses
 DXM_MM = 2.71e2 #g/mol
@@ -61,10 +58,8 @@ DXM_2 = (DXM_conc * CSY_in) / 1000 / DXM_MM #mol/day
 MAOI_2 = MAOI_in / 1000 / MAOI_MM #mol/day #Assume all MAOI consumed goes to Reactor/Brain
 trp_2 = trp_in #mol/day #Assume all trp consumed goes to Reactor 
 
-#Stream 3
+#Stream 3 - decay of MAOI and DMX incorporated into model
 CSY_3 = ((CSY_in * CSY_Density * 1000) - (DXM_conc * CSY_in)) #mg/day
-DXM_3 = c #should be equal to DXM_8 
-MAOI_3 = d #should be equal to MAOI_8 #use half life? #using inhibitor(time)
 
 #Reactor
 trp_reactor = (0.02*trp_in)/1000/trp_MM #mol/day
@@ -87,7 +82,7 @@ elif case == 5:
     S_5 = 0.9925*5.12e-21 #percentage of 5.12e-21 depending on saturation
     Acc_0 = 5.12e-21 - S_5 
 elif case == 6:
-    S_5 = 0.25*5.12e-21 #percentage of 5.12e-21 depending on saturation 
+    S_5 = 0.75*5.12e-21 #percentage of 5.12e-21 depending on saturation 
     Acc_0 = 5.12e-21 - S_5
 elif case == 7:
     S_5 = 0.5*5.12e-21 #percentage of 5.12e-21 depending on saturation 
@@ -102,8 +97,7 @@ DXM_5 = DXM_4
 S_6 = S_5
 MAOI_6 = MAOI_5
 
-#Stream 9
-S_9 = c #negative feedback loop - Geena Luise 
+#Stream 9 solved for in BrainB
 
 #Brain B - Serotonin Metabolism 
 Km_maoA = 0.192 #mM
@@ -114,7 +108,6 @@ Ki_maoi_maoA = 0.0373 / S_cells #mM per cell
 Ki_maoi_maoB = 0.0136 / S_cells #mM per cell
 Serotonin_conc_B = S_6 / S_cells *1000 #millimoles per cell 
 brainSat = 0.011*1000 #mmol
-print("S5: ", S_5)
 
 
 

@@ -17,7 +17,7 @@ STEPS TO MAKE NEW GRAPH WITH MULTIPLE CASES:
 4. After running control for all cases, open graph.py, change the name of file at the bottom then run it!
 '''
 
-with open("output.txt", "a") as file:
+with open("acc.txt", "a") as file:
     file.write(str(c.case) + ":")
     file.write(','.join(str(a) for a in Acc.acc)) #<- change last thing to whatever u need to graph.
     file.write('\n')
@@ -25,6 +25,7 @@ with open("output.txt", "a") as file:
 print("case", c.case, "completed")
 
 '''
+#use this to graph 2 things (ie. serotonin vs degraded serotonin)
 with open("output.txt", "a") as file:
     # Save Ser
     file.write(f"{c.case}:")
