@@ -19,7 +19,7 @@ STEPS TO MAKE NEW GRAPH WITH MULTIPLE CASES:
 
 with open("acc.txt", "a") as file:
     file.write(str(c.case) + ":")
-    file.write(','.join(str(a) for a in Acc.acc)) #<- change last thing to whatever u need to graph.
+    file.write(','.join(str(a) for a in A.product_mmol)) #<- change last thing to whatever u need to graph.
     file.write('\n')
 
 print("case", c.case, "completed")
