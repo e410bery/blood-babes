@@ -6,6 +6,8 @@ import BrainAacc as A
 import BrainBacc as B
 import math
 
+#used to track total accumulation of serotonin in cleft
+
 initial = 0.0013480393692862748; #original value for case 0, starting point for all serotonin tracking.
 t = np.linspace(0, 24, 500)
 S_4 = []
